@@ -1,0 +1,12 @@
+.card {
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  
+  h3 {
+    font-size: 24px;
+  }
+  

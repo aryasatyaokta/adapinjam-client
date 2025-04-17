@@ -1,0 +1,111 @@
+<div class="container mt-5">
+    <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"></div>
+      </div>
+      
+      <div *ngIf="!loading && userData" class="container mt-4">
+        <div class="d-flex justify-content-end mb-3">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePasswordModal">
+            <i class="bi bi-key me-1"></i> Update Password
+          </button>
+        </div>        
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 bg-lightblue p-4 h-100">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-person-fill fs-3 text-white me-2"></i>
+                <h5 class="text-white fw-semibold mb-0">Informasi Pribadi</h5>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-white">Nama</label>
+                <div class="form-control fw-semibold text-dark bg-white">
+                  {{ userData.user.name }}
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-white">Email</label>
+                <div class="form-control fw-semibold text-dark bg-white">
+                  {{ userData.user.email }}
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-white">Role</label>
+                <div class="form-control fw-semibold text-dark bg-white">
+                  {{ userData.user.role.name_role }}
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Card 2: Info Pegawai -->
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 bg-softgray p-4 h-100">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-building fs-3 text-dark me-2"></i>
+                <h5 class="fw-semibold mb-0">Detail Pegawai</h5>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-dark">NIP</label>
+                <div class="form-control fw-semibold bg-white">
+                  {{ userData.nip }}
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-dark">Cabang</label>
+                <div class="form-control fw-semibold bg-white">
+                  {{ userData.branch.branch }}
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-dark">Status</label>
+                <div
+                  class="form-control fw-semibold bg-white"
+                  [ngClass]="{
+                    'text-success': userData.statusEmployee === 'ACTIVE',
+                    'text-danger': userData.statusEmployee !== 'ACTIVE'
+                  }">
+                  {{ userData.statusEmployee }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="updatePasswordModal" tabindex="-1" aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="updatePasswordModalLabel">Ubah Password</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="oldPassword" class="form-label">Password Lama</label>
+          <input
+            type="password"
+            class="form-control"
+            id="oldPassword"
+            [(ngModel)]="oldPassword"
+            placeholder="Masukkan password lama" />
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Password Baru</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPassword"
+            [(ngModel)]="newPassword"
+            placeholder="Masukkan password baru" />
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-primary" (click)="updatePassword()">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

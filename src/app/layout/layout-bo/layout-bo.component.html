@@ -1,0 +1,72 @@
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="border-end text-white sidebar">
+      <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom">
+        <img src="assets\img\logo.png" alt="Logo" style="max-width: 150px;" />
+      </div>
+      <div class="list-group">
+        <a 
+          routerLink="/bo/dashboard" 
+          routerLinkActive="active-menu"
+          class="list-group-item cursor-pointer">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard
+        </a>
+      </div>
+      <div class="list-group">
+        <a 
+          routerLink="/bo/pengajuan" 
+          routerLinkActive="active-menu"
+          class="list-group-item cursor-pointer">
+          <i class="bi bi-file-earmark-text me-2"></i> List Pengajuan
+        </a>
+      </div>
+      <div class="list-group">
+        <a 
+          routerLink="/bo/detail-akun" 
+          routerLinkActive="active-menu"
+          class="list-group-item cursor-pointer">
+          <i class="bi bi-person-circle me-2"></i> Detail Akun
+        </a>
+      </div>
+      <div class="list-group">
+        <a 
+          routerLink="/bo/history-pengajuan" 
+          routerLinkActive="active-menu"
+          class="list-group-item cursor-pointer">
+          <i class="bi bi-clock-history me-2"></i> Riwayat Pengajuan
+        </a>
+      </div>
+      
+    </div>
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3">
+        <button class="btn btn-outline-dark" id="menu-toggle">
+          <i class="bi bi-list"></i>
+        </button>
+        <div class="ms-auto d-flex align-items-center gap-3">
+          <button
+            class="btn btn-outline-primary position-relative"
+            (click)="goToPengajuan()"
+            *ngIf="jumlahNotifikasi > 0"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            [attr.title]="jumlahNotifikasi + ' pengajuan untuk direview'">
+            <i class="bi bi-bell"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ jumlahNotifikasi }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </button>
+          <span class="fw-semibold"><i class="bi bi-person-circle me-2"></i> Welcome, {{ username }}</span>
+          <button class="btn btn-outline-danger btn-sm" (click)="logout()">Logout</button>
+        </div>
+      </nav>
+  
+      <div class="container-fluid mt-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

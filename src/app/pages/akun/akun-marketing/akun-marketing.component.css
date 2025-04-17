@@ -1,0 +1,12 @@
+.bg-lightblue {
+    background: linear-gradient(135deg, #0d6efd, #cad5f7);
+  }
+  
+  .bg-softgray {
+    background: linear-gradient(135deg, #d0d0d0, #ffffff);
+  }
+  
+  .card label {
+    font-size: 0.9rem;
+  }
+  

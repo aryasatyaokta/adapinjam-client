@@ -1,0 +1,46 @@
+  table {
+    font-size: 0.95rem;
+  }
+
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .table th {
+    white-space: nowrap;
+  }
+  
+  .page-link {
+    cursor: pointer;
+  }
+  
+  
+  modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .modal-body h6 {
+    font-weight: 600;
+    color: #0056b3;
+  }
+
+  .modal-body ul {
+    line-height: 1.8;
+  }
+
+  .modal-footer {
+    border-top: 1px solid #e9ecef;
+  }
+
+  .list-unstyled li {
+    margin-bottom: 10px;
+  }
+
+  .list-unstyled li strong {
+    color: #333;
+  }
+
+  .modal-content {
+    border-radius: 8px;
+  }
