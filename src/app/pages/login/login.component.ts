@@ -58,7 +58,7 @@ export class LoginComponent {
               this.router.navigate(['/bo']);
               break;
             case 'Super Admin':
-              this.router.navigate(['/dashboard-super-admin']);
+              this.router.navigate(['/sa']);
               break;
             default:
               this.error = 'Unknown role!';

@@ -9,10 +9,21 @@ import { HistoryPengajuanMarketingComponent } from './pages/history/history-peng
 import { DashboardMarketingComponent } from './pages/dashboard/marketing/dashboard-marketing/dashboard-marketing.component';
 import { BranchManagerComponent } from './pages/dashboard/branch-manager/branch-manager.component';
 import { BackOfficeComponent } from './pages/dashboard/back-office/back-office.component';
+import { SuperAdminComponent } from './pages/dashboard/super-admin/super-admin.component';
+import { DashboardSaComponent } from './pages/dashboard/super-admin/dashboard-sa/dashboard-sa.component';
+import { FeaturePegawaiComponent } from './pages/feature-pegawai/feature-pegawai.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('../app/pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+  },
+  {
+    path: 'reset-password/:token',
+    loadComponent: () => import('../app/pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+  },    
   {
     path: 'mkt',
     canActivate: [authGuard, roleGuard('Marketing')],
@@ -81,6 +92,34 @@ export const routes: Routes = [
       {
         path: 'pengajuan',
         loadComponent: () => PengajuanMarketingComponent
+      },
+      {
+        path: 'detail-akun',
+        loadComponent: () => AkunMarketingComponent
+      },
+      {
+        path: 'history-pengajuan',
+        loadComponent: () => HistoryPengajuanMarketingComponent
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: 'sa',
+    canActivate: [authGuard, roleGuard('Super Admin')],
+    loadComponent: () =>SuperAdminComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => DashboardSaComponent
+      },
+      {
+        path: 'pegawai',
+        loadComponent: () => FeaturePegawaiComponent
       },
       {
         path: 'detail-akun',

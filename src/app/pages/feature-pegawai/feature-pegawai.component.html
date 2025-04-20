@@ -1,0 +1,110 @@
+<div class="container mt-4">
+  <h4 class="bi bi-people mb-3"> Data Pegawai</h4>
+
+  <!-- Search Bar -->
+  <div class="mb-3" style="max-width: 170px;">
+    <input [(ngModel)]="searchQuery" class="form-control" type="text" placeholder="Cari Pegawai...">
+  </div>
+
+  <!-- Add Button -->
+  <button class="btn btn-primary mb-3" (click)="addEmployee()">
+    <i class="bi bi-plus-circle me-1"></i> Tambah Pegawai
+  </button>
+
+  <!-- Table of Employees -->
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-striped table-hover align-middle border">
+      <thead class="text-center">
+        <tr>
+          <th style="background-color: #0d6efd; color: white;">Nama</th>
+          <th style="background-color: #0d6efd; color: white;">NIP</th>
+          <th style="background-color: #0d6efd; color: white;">Email</th>
+          <th style="background-color: #0d6efd; color: white;">Role</th>
+          <th style="background-color: #0d6efd; color: white;">Cabang</th>
+          <th style="background-color: #0d6efd; color: white;">Status</th>
+          <th style="background-color: #0d6efd; color: white;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let employee of getPaginatedEmployees()">
+          <td>{{ employee.user?.name }}</td>
+          <td>{{ employee.nip }}</td>
+          <td>{{ employee.user?.email }}</td>
+          <td>{{ employee.user?.role?.name_role }}</td>
+          <td>{{ employee.branch?.branch }}</td>
+          <td>{{ employee.statusEmployee }}</td>
+          <td>
+            <button (click)="editEmployee(employee)" class="btn btn-sm btn-outline-primary  me-1">
+              <i class="bi bi-pencil"></i> Edit
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="getPaginatedEmployees().length === 0">
+          <td colspan="7" class="text-center text-muted">Tidak ada data pegawai</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end mt-3">
+      <button class="btn btn-outline-primary me-2" (click)="changePage(currentPage - 1)" [disabled]="currentPage <= 1">«</button>
+      <span class="mt-2">{{ currentPage }} of {{ totalPages }}</span>
+      <button class="btn btn-outline-primary ms-2" (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages">»</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade show d-block" *ngIf="showModal" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 data-bs-toggle="modal" class="modal-title">{{ employeeToEdit.id ? 'Edit Pegawai' : 'Tambah Pegawai' }}</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="saveEmployee()">
+          <div class="mb-3" *ngIf="!employeeToEdit.id">
+            <label for="name" class="form-label">Nama</label>
+            <input [(ngModel)]="employeeToEdit.name" name="name" id="name" class="form-control" required />
+          </div>
+          <div class="mb-3" *ngIf="!employeeToEdit.id">
+            <label for="email" class="form-label">Email</label>
+            <input [(ngModel)]="employeeToEdit.email" name="email" id="email" type="email" class="form-control" required />
+          </div>
+          <div class="mb-3" *ngIf="!employeeToEdit.id">
+            <label for="password" class="form-label">Password</label>
+            <input [(ngModel)]="employeeToEdit.password" name="password" id="password" type="password" class="form-control" [required]="!employeeToEdit.id" />
+          </div>
+          <div class="mb-3">
+            <label for="nip" class="form-label">NIP</label>
+            <input [(ngModel)]="employeeToEdit.nip" name="nip" id="nip" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select [(ngModel)]="employeeToEdit.role" name="role" id="role" class="form-select" required>
+              <option *ngFor="let role of roles" [ngValue]="role">{{ role.name_role }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="branch" class="form-label">Cabang</label>
+            <select class="form-select" [(ngModel)]="employeeToEdit.branch" name="branch" required>
+              <option *ngFor="let branch of branches" [ngValue]="branch">{{ branch.branch }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="statusEmployee" class="form-label">Status Pegawai</label>
+            <select class="form-select" [(ngModel)]="employeeToEdit.statusEmployee" name="statusEmployee" required>
+              <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+            </select>
+          </div>                    
+                    
+          <!-- Optional: Add dropdowns for role and branch -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-secondary me-2" (click)="closeModal()">Batal</button>
+            <button type="submit" class="btn btn-outline-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

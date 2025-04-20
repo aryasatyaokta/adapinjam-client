@@ -74,4 +74,20 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
   }
+
+  requestPasswordReset(nip: string) {
+    return this.http.post('http://localhost:8080/api/v1/reset-password/employee', { nip }, { responseType: 'text' }).pipe(
+      catchError(err => throwError(() => err.error || 'Permintaan reset gagal.'))
+    );
+  }
+
+  resetPassword(token: string, newPassword: string, confirmPassword: string) {
+    return this.http.post(
+      `http://localhost:8080/api/v1/reset-password/employee/reset/${token}`,
+      { newPassword, confirmPassword },
+      { responseType: 'text' }
+    ).pipe(
+      catchError(err => throwError(() => err.error || 'Reset password gagal.'))
+    );
+  }
 }
