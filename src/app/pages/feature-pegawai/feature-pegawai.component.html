@@ -30,7 +30,7 @@
           <td>{{ employee.user?.name }}</td>
           <td>{{ employee.nip }}</td>
           <td>{{ employee.user?.email }}</td>
-          <td>{{ employee.user?.role?.name_role }}</td>
+          <td>{{ employee.user?.role?.nameRole }}</td>
           <td>{{ employee.branch?.branch }}</td>
           <td>{{ employee.statusEmployee }}</td>
           <td>
@@ -44,11 +44,25 @@
         </tr>
       </tbody>
     </table>
-    <div class="d-flex justify-content-end mt-3">
-      <button class="btn btn-outline-primary me-2" (click)="changePage(currentPage - 1)" [disabled]="currentPage <= 1">«</button>
-      <span class="mt-2">{{ currentPage }} of {{ totalPages }}</span>
-      <button class="btn btn-outline-primary ms-2" (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages">»</button>
-    </div>
+    <div class="d-flex justify-content-between align-items-center mt-4 px-3 py-2 rounded border shadow-sm bg-light">
+      <div class="text-muted fw-semibold">
+        Menampilkan <span class="text-primary">{{ getPaginatedEmployees().length }}</span> data
+      </div>
+    
+      <nav aria-label="Pagination">
+        <ul class="pagination mb-0">
+          <li class="page-item" [class.disabled]="currentPage <= 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage <= 1">«</button>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link bg-white border-0 fw-semibold">{{ currentPage }} dari {{ totalPages }}</span>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage >= totalPages">
+            <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages">»</button>
+          </li>
+        </ul>
+      </nav>
+    </div>    
   </div>
 </div>
 
@@ -71,10 +85,6 @@
             <label for="email" class="form-label">Email</label>
             <input [(ngModel)]="employeeToEdit.email" name="email" id="email" type="email" class="form-control" required />
           </div>
-          <div class="mb-3" *ngIf="!employeeToEdit.id">
-            <label for="password" class="form-label">Password</label>
-            <input [(ngModel)]="employeeToEdit.password" name="password" id="password" type="password" class="form-control" [required]="!employeeToEdit.id" />
-          </div>
           <div class="mb-3">
             <label for="nip" class="form-label">NIP</label>
             <input [(ngModel)]="employeeToEdit.nip" name="nip" id="nip" class="form-control" required />
@@ -82,7 +92,7 @@
           <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select [(ngModel)]="employeeToEdit.role" name="role" id="role" class="form-select" required>
-              <option *ngFor="let role of roles" [ngValue]="role">{{ role.name_role }}</option>
+              <option *ngFor="let role of roles" [ngValue]="role">{{ role.nameRole }}</option>
             </select>
           </div>
           <div class="mb-3">

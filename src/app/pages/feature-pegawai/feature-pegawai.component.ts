@@ -4,6 +4,8 @@ import { BranchService } from '../../core/service/branch.service';
 import { RoleService } from '../../core/service/role.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-feature-pegawai',
@@ -84,7 +86,6 @@ export class FeaturePegawaiComponent implements OnInit {
       name: '',
       nip: '',
       email: '',
-      password: '',
       role: { id: '' }, 
       branch: { id: '' },
       statusEmployee: 'ACTIVE'
@@ -122,31 +123,82 @@ export class FeaturePegawaiComponent implements OnInit {
   }
 
   saveEmployee() {
+    // Check if form is valid
     if (!this.isFormValid()) return;
-    const employeeData = {
-      user: {
-        name: this.employeeToEdit.name,
-        email: this.employeeToEdit.email,
-        password: this.employeeToEdit.password,
-        role: this.employeeToEdit.role,
-      },
-      nip: this.employeeToEdit.nip,
-      branch: this.employeeToEdit.branch,
-      statusEmployee: this.employeeToEdit.statusEmployee
-    };
   
-    if (this.employeeToEdit.id) {
-      this.pegawaiService.updateEmployee(this.employeeToEdit.id, employeeData).subscribe(() => {
-        this.loadEmployees();
-        this.closeModal();
-      });
-    } else {
-      this.pegawaiService.addEmployee(employeeData).subscribe(() => {
-        this.loadEmployees();
-        this.closeModal();
-      });
-    }
-  }
+    // Show SweetAlert confirmation before saving data
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: 'Ingin menambah atau mengedit data pegawai?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Simpan',
+      cancelButtonText: 'Batal',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Prepare employee data
+        const employeeData = {
+          user: {
+            name: this.employeeToEdit.name,
+            email: this.employeeToEdit.email,
+            role: this.employeeToEdit.role,
+          },
+          nip: this.employeeToEdit.nip,
+          branch: this.employeeToEdit.branch,
+          statusEmployee: this.employeeToEdit.statusEmployee
+        };
+  
+        // Add or update employee
+        if (this.employeeToEdit.id) {
+          // Edit existing employee
+          this.pegawaiService.updateEmployee(this.employeeToEdit.id, employeeData).subscribe({
+            next: () => {
+              Swal.fire(
+                'Berhasil!',
+                'Data pegawai berhasil diperbarui.',
+                'success'
+              );
+              this.loadEmployees();
+              this.closeModal();
+            },
+            error: (err) => {
+              Swal.fire(
+                'Gagal!',
+                'Terjadi kesalahan saat memperbarui data pegawai.',
+                'error'
+              );
+            }
+          });
+        } else {
+          // Add new employee
+          this.pegawaiService.addEmployee(employeeData).subscribe({
+            next: () => {
+              Swal.fire(
+                'Berhasil!',
+                'Data pegawai berhasil ditambahkan.',
+                'success'
+              );
+              this.loadEmployees();
+              this.closeModal();
+            },
+            error: (err) => {
+              Swal.fire(
+                'Gagal!',
+                'Terjadi kesalahan saat menambahkan data pegawai.',
+                'error'
+              );
+            }
+          });
+        }
+      } else {
+        Swal.fire(
+          'Dibatalkan!',
+          'Proses penambahan atau perubahan data pegawai dibatalkan.',
+          'info'
+        );
+      }
+    });
+  }  
 
   isFormValid() {
     if (!this.employeeToEdit.name || !this.employeeToEdit.email || !this.employeeToEdit.nip || !this.employeeToEdit.role || !this.employeeToEdit.branch) {

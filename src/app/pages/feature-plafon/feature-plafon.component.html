@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <h4 class="bi bi-cash-stack mb-3"> Data Plafon</h4>
+    <button class="btn btn-primary" (click)="onAdd()">
+        <i class="bi bi-plus-circle me-1"></i>Tambah Plafon
+    </button>
+  
+    <form [formGroup]="plafonForm" (ngSubmit)="onSubmit()" class="mb-4 mt-2">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <input type="text" class="form-control" placeholder="Jenis Plafon" formControlName="jenisPlafon">
+        </div>
+        <div class="col-md-3">
+          <input type="number" class="form-control" placeholder="Jumlah Plafon" formControlName="jumlahPlafon">
+        </div>
+        <div class="col-md-3">
+          <input type="number" class="form-control" placeholder="Bunga" formControlName="bunga">
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-outline-primary" type="submit">{{ isEditing ? 'Update' : 'Tambah' }}</button>
+        </div>
+      </div>
+    </form>
+  
+    <div class="row g-4">
+        <div class="col-md-3" *ngFor="let plafon of plafons">
+            <div class="card text-white h-100" [ngClass]="getColorClass(plafon.jenisPlafon)">
+
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex align-items-center mb-3">
+                <i [ngClass]="getIcon(plafon.jenisPlafon)" class="me-2 fs-3"></i>
+                <h5 class="card-title mb-0">{{ plafon.jenisPlafon }}</h5>
+              </div>
+              <div class="mb-3">
+                <p class="card-text mb-1"><strong>Jumlah:</strong> Rp {{ plafon.jumlahPlafon | number }}</p>
+                <p class="card-text mb-0"><strong>Bunga:</strong> {{ plafon.bunga }}%</p>
+              </div>
+              <button class="btn btn-light btn-sm mt-auto" (click)="onEdit(plafon)">
+                <i class="bi bi-pencil-fill me-1"></i> Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+  

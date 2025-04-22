@@ -1,17 +1,13 @@
-<div class="registration-form mt-5 ustify-content-center">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- <div class="form-icon">
-      <span><i class="icon icon-user"></i></span>
-    </div> -->
-
-    <div class="text-center mb-3">
-      <img src="assets\img\logo.png" alt="Logo" style="max-width: 200px;" />
+<div class="registration-form mt-5 d-flex justify-content-center align-items-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-100">
+    <div class="text-center mb-4">
+      <img src="assets/img/logo.png" alt="Logo" class="logo-img" />
     </div>
 
-    <div  class="text-center Login fw-bold text-xl mb-3">
+    <div class="text-center fw-bold text-xl mb-3">
       <h4>Login</h4>
     </div>
-    
+
     <div class="form-group">
       <input
         formControlName="username"
@@ -21,7 +17,7 @@
         placeholder="NIP"
       />
     </div>
-    
+
     <div class="form-group">
       <input
         formControlName="password"
@@ -32,27 +28,14 @@
       />
     </div>
 
-    <div class="text-end">
-      <a [routerLink]="['/forgot-password']">Lupa Password?</a>
-     </div> 
+    <div class="text-end mb-3">
+      <a [routerLink]="['/forgot-password']" class="text-decoration-none">Lupa Password?</a>
+    </div>
 
     <div class="text-center">
-      <button type="submit" class="btn btn-block create-account">
+      <button type="submit" class="btn btn-block create-account w-100">
         Login
       </button>
     </div>
-    
-    <!-- <div *ngIf="error" class="text-danger text-center mt-2">
-      {{ error }}
-    </div> -->
   </form>
-
-  <!-- <div class="social-media">
-    <h5>Sign in with social media</h5>
-    <div class="social-icons">
-      <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-      <a href="#"><i class="icon-social-google" title="Google"></i></a>
-      <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
-    </div>
-  </div> -->
 </div>

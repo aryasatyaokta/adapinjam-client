@@ -12,6 +12,9 @@ import { BackOfficeComponent } from './pages/dashboard/back-office/back-office.c
 import { SuperAdminComponent } from './pages/dashboard/super-admin/super-admin.component';
 import { DashboardSaComponent } from './pages/dashboard/super-admin/dashboard-sa/dashboard-sa.component';
 import { FeaturePegawaiComponent } from './pages/feature-pegawai/feature-pegawai.component';
+import { FeatureBranchComponent } from './pages/feature-branch/feature-branch.component';
+import { FeatureCustomerComponent } from './pages/feature-customer/feature-customer.component';
+import { FeaturePlafonComponent } from './pages/feature-plafon/feature-plafon.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -122,12 +125,16 @@ export const routes: Routes = [
         loadComponent: () => FeaturePegawaiComponent
       },
       {
-        path: 'detail-akun',
-        loadComponent: () => AkunMarketingComponent
+        path: 'customer',
+        loadComponent: () => FeatureCustomerComponent
       },
       {
-        path: 'history-pengajuan',
-        loadComponent: () => HistoryPengajuanMarketingComponent
+        path: 'cabang',
+        loadComponent: () => FeatureBranchComponent
+      },
+      {
+        path: 'plafon',
+        loadComponent: () => FeaturePlafonComponent
       },
       {
         path: '',

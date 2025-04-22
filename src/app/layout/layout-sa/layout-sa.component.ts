@@ -24,12 +24,12 @@ export class LayoutSaComponent {
     this.username = this.auth.getUsername();
   }
 
-  ngOnInit(): void {
-    this.cekNotifikasi();
-    this.pengajuanService.notifikasiTrigger$.subscribe(() => {
-      this.cekNotifikasi();
-    });
-  }
+  // ngOnInit(): void {
+  //   this.cekNotifikasi();
+  //   this.pengajuanService.notifikasiTrigger$.subscribe(() => {
+  //     this.cekNotifikasi();
+  //   });
+  // }
   
 
   ngAfterViewInit(): void {
@@ -43,20 +43,20 @@ export class LayoutSaComponent {
     tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
   }
 
-  cekNotifikasi(): void {
-    this.pengajuanService.getReviewHistory().subscribe({
-      next: (data) => {
-        this.jumlahNotifikasi = data.length;
-      },
-      error: (err) => {
-        console.error('Gagal memuat notifikasi:', err);
-      },
-    });
-  }
+  // cekNotifikasi(): void {
+  //   this.pengajuanService.getReviewHistory().subscribe({
+  //     next: (data) => {
+  //       this.jumlahNotifikasi = data.length;
+  //     },
+  //     error: (err) => {
+  //       console.error('Gagal memuat notifikasi:', err);
+  //     },
+  //   });
+  // }
 
-  goToPengajuan(): void {
-    this.router.navigate(['/pengajuan']);
-  }
+  // goToPengajuan(): void {
+  //   this.router.navigate(['/pengajuan']);
+  // }
 
   logout(): void {
     this.auth.logout();

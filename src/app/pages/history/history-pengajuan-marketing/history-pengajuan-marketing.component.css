@@ -22,7 +22,6 @@
   }
   
   .pagination .page-link {
-    color: #0d6efd;
     cursor: pointer;
   }
   
@@ -46,8 +45,5 @@
   .table {
     margin-bottom: 0;
   }
-  
-  .text-muted {
-    font-style: italic;
-  }
+
   

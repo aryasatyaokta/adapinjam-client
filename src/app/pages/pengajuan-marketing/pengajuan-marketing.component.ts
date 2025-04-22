@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PengajuanMarketingService } from '../../core/service/pengajuan-marketing.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pengajuan-marketing',
@@ -83,28 +84,40 @@ export class PengajuanMarketingComponent implements OnInit {
       error: (err) => {
         console.error('Gagal review:', err);
   
-        // Jika error tapi respon punya body dan sudah berpindah bucket, tetap anggap sukses
+        // If error message indicates already processed or status 200, assume success
         if (err?.error?.message?.includes('sudah diproses') || err?.status === 200) {
           this.onReviewSuccess();
         } else {
-          alert('Terjadi kesalahan saat mengirim review.');
+          // Show error notification
+          Swal.fire({
+            title: 'Terjadi Kesalahan',
+            text: 'Gagal mengirim review. Silakan coba lagi.',
+            icon: 'error',
+            confirmButtonText: 'Coba Lagi',
+          });
         }
       },
     });
   }
   
+  
   private onReviewSuccess(): void {
-    alert('Review berhasil dikirim.');
+    Swal.fire({
+      title: 'Review Berhasil Dikirim',
+      text: 'Review Anda berhasil dikirim. Data akan diperbarui.',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    });
+  
+    // Reset state and refresh data
     this.selectedReviewItem = null;
     this.reviewCatatan = '';
     this.loadReviewData();
     this.pengajuanService.triggerNotifikasiRefresh();
-    
+  
+    // Hide the modal after review submission
     const reviewModalEl = document.getElementById('reviewModal');
     const modal = new (window as any).bootstrap.Modal(reviewModalEl);
     modal.hide();
-  }
-  
-
-  
+  }  
 }

@@ -1,0 +1,24 @@
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Gradient backgrounds for each tier */
+  .bg-bronze {
+    background: linear-gradient(135deg, #cd7f32, #b87333);
+  }
+  .bg-silver {
+    background: linear-gradient(135deg, #c0c0c0, #a9a9a9);
+  }
+  .bg-gold {
+    background: linear-gradient(135deg, #ffd700, #ffcc00);
+  }
+  .bg-platinum {
+    background: linear-gradient(135deg, #e5dccb, #cfcfcf);
+  }
+  
