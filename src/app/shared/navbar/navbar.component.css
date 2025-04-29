@@ -1,0 +1,21 @@
+#wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  #sidebar-wrapper {
+    min-width: 250px;
+    max-width: 250px;
+    background-color: #ffff;
+    transition: all 0.3s ease;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  
+  

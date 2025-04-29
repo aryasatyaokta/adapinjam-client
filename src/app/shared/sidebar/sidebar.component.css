@@ -1,0 +1,44 @@
+#sidebar-wrapper {
+  min-width: 250px;
+  height: 100vh; /* Tambahkan ini agar sidebar full height */
+  background-color: #fff;
+  border-right: 1px solid #dee2e6; /* Tambahkan border kanan */
+  transition: all 0.3s ease;
+}
+
+  
+  .sidebar .list-group-item {
+    border: none;
+    padding: 15px 25px;
+  }
+  
+  .sidebar .list-group-item:hover {
+    background-color: #495057;
+    color: #ffff;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+  }
+
+/* Hover effect */
+.sidebar .list-group-item:hover {
+    background-color: #e8e8e8;
+    color: #0d6efd; /* Bootstrap primary blue */
+    cursor: pointer;
+  }
+  
+  /* Active link styling */
+  .sidebar .list-group-item.active-menu {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Ensure icon color changes too */
+  .sidebar .list-group-item.active-menu i {
+    color: white;
+  }
+  
+  
+  

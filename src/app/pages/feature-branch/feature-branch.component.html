@@ -1,15 +1,14 @@
 <div class="container mt-4">
     <h4 class="bi bi-building mb-3"> Data Cabang</h4>
   
-    <!-- Search Bar -->
-    <div class="mb-3" style="max-width: 170px;">
-      <input [(ngModel)]="searchQuery" class="form-control" type="text" placeholder="Cari Cabang..." (input)="applySearch()">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary mb-3" (click)="addBranch()">
+        <i class="bi bi-plus-circle me-1"></i> Tambah Cabang
+      </button>
+      <div class="mb-3" style="max-width: 170px;">
+        <input [(ngModel)]="searchQuery" class="form-control" type="text" placeholder="Cari Cabang..." (input)="applySearch()">
+      </div>
     </div>
-  
-    <!-- Add Button -->
-    <button class="btn btn-primary mb-3" (click)="addBranch()">
-      <i class="bi bi-plus-circle me-1"></i> Tambah Cabang
-    </button>
   
     <!-- Table of Branches -->
     <div class="table-responsive shadow-sm rounded">

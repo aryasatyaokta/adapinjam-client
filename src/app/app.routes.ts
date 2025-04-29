@@ -15,6 +15,10 @@ import { FeaturePegawaiComponent } from './pages/feature-pegawai/feature-pegawai
 import { FeatureBranchComponent } from './pages/feature-branch/feature-branch.component';
 import { FeatureCustomerComponent } from './pages/feature-customer/feature-customer.component';
 import { FeaturePlafonComponent } from './pages/feature-plafon/feature-plafon.component';
+import { branchRoutes } from './pages/feature-branch/branch.routes';
+import { ShellComponent } from './shell/shell.component';
+import { DashboardComponent } from './pages/dashboards/dashboards.component';
+import { FeatureRolefeatureComponent } from './pages/feature-rolefeature/feature-rolefeature.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,121 +32,131 @@ export const routes: Routes = [
     loadComponent: () => import('../app/pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
   },    
   {
-    path: 'mkt',
-    canActivate: [authGuard, roleGuard('Marketing')],
-    loadComponent: () => MarketingComponent,
-    children: [
-      {
-        path: 'dashboard',
-        loadComponent: () => DashboardMarketingComponent
-      },
-      {
-        path: 'pengajuan',
-        loadComponent: () => PengajuanMarketingComponent
-      },
-      {
-        path: 'detail-akun',
-        loadComponent: () => AkunMarketingComponent
-      },
-      {
-        path: 'history-pengajuan',
-        loadComponent: () => HistoryPengajuanMarketingComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: 'bm',
-    canActivate: [authGuard, roleGuard('Branch Manager')],
-    loadComponent: () => BranchManagerComponent,
-    children: [
-      {
-        path: 'dashboard',
-        loadComponent: () => DashboardMarketingComponent
-      },
-      {
-        path: 'pengajuan',
-        loadComponent: () => PengajuanMarketingComponent
-      },
-      {
-        path: 'detail-akun',
-        loadComponent: () => AkunMarketingComponent
-      },
-      {
-        path: 'history-pengajuan',
-        loadComponent: () => HistoryPengajuanMarketingComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: 'bo',
-    canActivate: [authGuard, roleGuard('Back Office')],
-    loadComponent: () => BackOfficeComponent,
-    children: [
-      {
-        path: 'dashboard',
-        loadComponent: () => DashboardMarketingComponent
-      },
-      {
-        path: 'pengajuan',
-        loadComponent: () => PengajuanMarketingComponent
-      },
-      {
-        path: 'detail-akun',
-        loadComponent: () => AkunMarketingComponent
-      },
-      {
-        path: 'history-pengajuan',
-        loadComponent: () => HistoryPengajuanMarketingComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: 'sa',
-    canActivate: [authGuard, roleGuard('Super Admin')],
-    loadComponent: () =>SuperAdminComponent,
-    children: [
-      {
-        path: 'dashboard',
-        loadComponent: () => DashboardSaComponent
-      },
-      {
-        path: 'pegawai',
-        loadComponent: () => FeaturePegawaiComponent
-      },
-      {
-        path: 'customer',
-        loadComponent: () => FeatureCustomerComponent
-      },
-      {
-        path: 'cabang',
-        loadComponent: () => FeatureBranchComponent
-      },
-      {
-        path: 'plafon',
-        loadComponent: () => FeaturePlafonComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
-    ]
-  },
+    path: '', component: ShellComponent, children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'pengajuan', component: PengajuanMarketingComponent },
+      { path: 'detail-akun', component: AkunMarketingComponent},
+      { path: 'history-pengajuan', component: HistoryPengajuanMarketingComponent},
+      { path: 'pegawai', component: FeaturePegawaiComponent},
+      { path: 'cabang', component: FeatureBranchComponent},
+      { path: 'customer', component: FeatureCustomerComponent},
+      { path: 'plafon', component: FeaturePlafonComponent},
+      { path: 'role', component: FeatureRolefeatureComponent}
+    ],
+  }
+  // {
+  //   path: 'mkt',
+  //   canActivate: [authGuard, roleGuard('Marketing')],
+  //   loadComponent: () => MarketingComponent,
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       loadComponent: () => DashboardMarketingComponent
+  //     },
+  //     {
+  //       path: 'pengajuan',
+  //       loadComponent: () => PengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: 'detail-akun',
+  //       loadComponent: () => AkunMarketingComponent
+  //     },
+  //     {
+  //       path: 'history-pengajuan',
+  //       loadComponent: () => HistoryPengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: '',
+  //       redirectTo: 'dashboard',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: 'bm',
+  //   canActivate: [authGuard, roleGuard('Branch Manager')],
+  //   loadComponent: () => BranchManagerComponent,
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       loadComponent: () => DashboardMarketingComponent
+  //     },
+  //     {
+  //       path: 'pengajuan',
+  //       loadComponent: () => PengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: 'detail-akun',
+  //       loadComponent: () => AkunMarketingComponent
+  //     },
+  //     {
+  //       path: 'history-pengajuan',
+  //       loadComponent: () => HistoryPengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: '',
+  //       redirectTo: 'dashboard',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: 'bo',
+  //   canActivate: [authGuard, roleGuard('Back Office')],
+  //   loadComponent: () => BackOfficeComponent,
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       loadComponent: () => DashboardMarketingComponent
+  //     },
+  //     {
+  //       path: 'pengajuan',
+  //       loadComponent: () => PengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: 'detail-akun',
+  //       loadComponent: () => AkunMarketingComponent
+  //     },
+  //     {
+  //       path: 'history-pengajuan',
+  //       loadComponent: () => HistoryPengajuanMarketingComponent
+  //     },
+  //     {
+  //       path: '',
+  //       redirectTo: 'dashboard',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: 'sa',
+  //   canActivate: [authGuard, roleGuard('Super Admin')],
+  //   loadComponent: () =>SuperAdminComponent,
+  //   children: [
+  //     ...branchRoutes,
+  //     {
+  //       path: 'dashboard',
+  //       loadComponent: () => DashboardSaComponent
+  //     },
+  //     {
+  //       path: 'pegawai',
+  //       loadComponent: () => FeaturePegawaiComponent
+  //     },
+  //     {
+  //       path: 'customer',
+  //       loadComponent: () => FeatureCustomerComponent
+  //     },
+  //     {
+  //       path: 'plafon',
+  //       loadComponent: () => FeaturePlafonComponent
+  //     },
+  //     {
+  //       path: '',
+  //       redirectTo: 'dashboard',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // },
   // {
   //   path: 'dashboard-marketing',
   //   canActivate: [authGuard, roleGuard('Marketing')],

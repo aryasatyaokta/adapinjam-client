@@ -1,18 +1,19 @@
-// src/app/services/role.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-  private apiUrl = 'http://localhost:8080/api/v1/roles'; // URL sesuai dengan endpoint yang kamu beri
+  private apiUrl = 'http://localhost:8080/api/v1/roles'; // URL endpoint for roles
+  private featuresUrl = 'http://localhost:8080/api/v1/features'; // URL endpoint for features
 
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Asumsikan token disimpan di localStorage
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -23,18 +24,40 @@ export class RoleService {
   }
 
   getRoleById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return forkJoin({
+      role: this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() }),
+      features: this.http.get<any>(`${this.apiUrl}/${id}/features`, { headers: this.getAuthHeaders() })
+    });
   }
 
-  createRole(role: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, role, { headers: this.getAuthHeaders() });
+  createRoleWithFeatures(role: any, featureIds: number[]): Observable<any> {
+    const data = {
+      name: role.name,
+      featureIds: featureIds
+    };
+    return this.http.post(`${this.apiUrl}/add`, data, {
+      headers: this.getAuthHeaders(),
+      responseType: 'text' as 'json'
+    });
+    
   }
 
-  updateRole(id: number, role: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, role, { headers: this.getAuthHeaders() });
+  updateRoleWithFeatures(id: number, role: any, featureIds: number[]): Observable<any> {
+    const data = {
+      name: role.name,
+      featureIds: featureIds
+    };
+    return this.http.put(`${this.apiUrl}/edit/${id}`, data, {
+      headers: this.getAuthHeaders(),
+      responseType: 'text' as 'json'
+    });    
   }
 
-  deleteRole(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  getFeaturesByRole(roleId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${roleId}/features`, { headers: this.getAuthHeaders() });
+  }
+
+  getAllFeatures(): Observable<any> {
+    return this.http.get<any>(this.featuresUrl, { headers: this.getAuthHeaders() });
   }
 }

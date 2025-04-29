@@ -1,15 +1,14 @@
 <div class="container mt-4">
   <h4 class="bi bi-people mb-3"> Data Pegawai</h4>
 
-  <!-- Search Bar -->
-  <div class="mb-3" style="max-width: 170px;">
-    <input [(ngModel)]="searchQuery" class="form-control" type="text" placeholder="Cari Pegawai...">
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-primary mb-3" (click)="addEmployee()">
+      <i class="bi bi-plus-circle me-1"></i> Tambah Pegawai
+    </button>
+    <div class="mb-3" style="max-width: 170px;">
+      <input [(ngModel)]="searchQuery" class="form-control" type="text" placeholder="Cari Pegawai...">
+    </div>
   </div>
-
-  <!-- Add Button -->
-  <button class="btn btn-primary mb-3" (click)="addEmployee()">
-    <i class="bi bi-plus-circle me-1"></i> Tambah Pegawai
-  </button>
 
   <!-- Table of Employees -->
   <div class="table-responsive shadow-sm rounded">

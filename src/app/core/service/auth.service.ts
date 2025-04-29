@@ -52,6 +52,7 @@ export class AuthService {
     localStorage.setItem('token', token);
     localStorage.setItem('role', payload.role);
     localStorage.setItem('name', payload.name);
+    localStorage.setItem('features',JSON.stringify(payload.features));
   }
 
   getToken(): string | null {
@@ -64,6 +65,10 @@ export class AuthService {
 
   getUsername(): string | null {
     return localStorage.getItem('name');
+  }
+
+  getFeature(): string | null {
+    return localStorage.getItem('feature');
   }
 
   isLoggedIn(): boolean {

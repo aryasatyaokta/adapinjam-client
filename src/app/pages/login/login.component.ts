@@ -31,7 +31,17 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // Menandai semua field agar validasi tampil
+  
+      Swal.fire({
+        icon: 'warning',
+        title: 'Form Belum Lengkap',
+        text: 'Silakan isi NIP dan Password sebelum login.',
+      });
+  
+      return;
+    }
   
     const { username, password } = this.form.value;
   
@@ -40,33 +50,16 @@ export class LoginComponent {
         this.auth.setSession(res.token);
         const role = this.auth.getRole();
   
-        // Tampilkan SweetAlert untuk login sukses
         Swal.fire({
           icon: 'success',
           title: 'Login Berhasil',
           showConfirmButton: false,
           timer: 1500
         }).then(() => {
-          switch (role) {
-            case 'Marketing':
-              this.router.navigate(['/mkt']);
-              break;
-            case 'Branch Manager':
-              this.router.navigate(['/bm']);
-              break;
-            case 'Back Office':
-              this.router.navigate(['/bo']);
-              break;
-            case 'Super Admin':
-              this.router.navigate(['/sa']);
-              break;
-            default:
-              this.error = 'Unknown role!';
-          }
+          this.router.navigate(['/dashboard']);
         });
       },
       error: () => {
-        // Tampilkan SweetAlert untuk error login
         Swal.fire({
           icon: 'error',
           title: 'Login Gagal',
@@ -75,5 +68,6 @@ export class LoginComponent {
       },
     });
   }
+  
   
 }

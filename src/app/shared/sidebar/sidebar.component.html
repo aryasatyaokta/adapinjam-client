@@ -1,0 +1,71 @@
+<div id="sidebar-wrapper" class="border text-white sidebar">
+    <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom">
+      <img src="assets/img/logo.png" alt="Logo" style="max-width: 150px;" />
+    </div>
+    <div class="list-group">
+      <a routerLink="/dashboard" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+    </div>
+    <div class="list-group">
+      <a *ngIf="hasFeature('REVIEW_HISTORY')" routerLink="/pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+        <i class="bi bi-file-earmark-text me-2"></i> List Pengajuan
+      </a>
+    </div>
+    <div class="list-group">
+      <a *ngIf="hasFeature('GET_EMPLOYEE_BYID')" routerLink="/detail-akun" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+        <i class="bi bi-person-circle me-2"></i> Detail Akun
+      </a>
+    </div>
+    <div class="list-group">
+      <a *ngIf="hasFeature('REVIEW_HISTORY_BYID')" routerLink="/history-pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+        <i class="bi bi-clock-history me-2"></i> Riwayat Pengajuan
+      </a>
+    </div>
+    <div class="list-group">
+      <a 
+        *ngIf="hasFeature('GET_ALLEMPLOYEE')"
+        routerLink="/pegawai" 
+        routerLinkActive="active-menu"
+        class="list-group-item cursor-pointer">
+        <i class="bi bi-people me-2"></i> Pegawai
+      </a>
+    </div>
+    <div class="list-group">
+      <a 
+        *ngIf="hasFeature('GET_ALL_BRANCH')"
+        routerLink="/cabang" 
+        routerLinkActive="active-menu"
+        class="list-group-item cursor-pointer">
+        <i class="bi bi-building me-2"></i> Cabang
+      </a>
+    </div>
+    <div class="list-group">
+      <a 
+        routerLink="/customer" 
+        *ngIf="hasFeature('GET_ALL_CUSTOMER')"
+        routerLinkActive="active-menu"
+        class="list-group-item cursor-pointer">
+        <i class="bi bi-person me-2"></i> Customer
+      </a>
+    </div>
+    <div class="list-group">
+      <a
+        *ngIf="hasFeature('GET_PLAFON')" 
+        routerLink="/plafon" 
+        routerLinkActive="active-menu"
+        class="list-group-item cursor-pointer">
+        <i class="bi bi-cash-stack me-2"></i> Plafon
+      </a>
+    </div>
+    <div class="list-group">
+      <a 
+        *ngIf="hasFeature('GET_ROLES')"
+        routerLink="/role" 
+        routerLinkActive="active-menu"
+        class="list-group-item cursor-pointer">
+        <i class="bi bi-sliders me-2"></i> Role
+      </a>
+    </div>
+  </div>
+  
