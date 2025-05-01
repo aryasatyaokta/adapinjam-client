@@ -72,6 +72,11 @@ export class FeatureBranchComponent implements OnInit {
   }
 
   saveBranch(): void {
+    // Validasi input
+    if (!this.isFormValid()) {
+      return;  // Tidak lanjut jika input tidak valid
+    }
+  
     // Show SweetAlert confirmation before saving branch data
     Swal.fire({
       title: 'Apakah Anda yakin?',
@@ -134,7 +139,26 @@ export class FeatureBranchComponent implements OnInit {
     });
   }
 
+  isFormValid(): boolean {
+    if (!this.branchToEdit.branch || this.branchToEdit.branch.trim() === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data Tidak Lengkap!',
+        text: 'Lengkapi Dulu Fieldnya',
+        confirmButtonText: 'Oke',
+      });
+      return false;
+    }
+    return true;
+  }
+  
+
   closeModal(): void {
     this.showModal = false;
+  }
+
+  hasFeature(feature: string): boolean {
+    const features = JSON.parse(localStorage.getItem('features') || '[]');
+    return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
   }
 }

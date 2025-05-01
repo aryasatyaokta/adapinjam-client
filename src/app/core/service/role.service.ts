@@ -19,8 +19,9 @@ export class RoleService {
     });
   }
 
-  getAllRoles(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, { headers: this.getAuthHeaders() });
+  getAllRoles(headers?: HttpHeaders): Observable<any> {
+    const finalHeaders = headers ?? this.getAuthHeaders();
+    return this.http.get<any>(this.apiUrl, { headers: finalHeaders });
   }
 
   getRoleById(id: number): Observable<any> {

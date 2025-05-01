@@ -1,23 +1,36 @@
-.card {
-    transition: transform 0.2s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-  }
-  
-  h3 {
-    font-size: 24px;
-  }
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+}
+.bg-gradient-success {
+  background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+}
+.bg-gradient-info {
+  background: linear-gradient(135deg, #1e88e5 0%, #64b5f6 100%);
+}
+.bg-gradient-warning {
+  background: linear-gradient(135deg, #2196f3 0%, #90caf9 100%);
+}
+.bg-gradient-danger {
+  background: linear-gradient(135deg, #42a5f5 0%, #bbdefb 100%);
+}
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, #64b5f6 0%, #e3f2fd 100%);
+}
 
-  .card {
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+
+
+/* Card hover effect */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.15);
+}
+
+/* Responsive typography */
+@media (max-width: 576px) {
+  .card-body i {
+    font-size: 1.5rem !important;
   }
-  .card:hover {
-    transform: translateY(-4px);
+  .card-title {
+    font-size: 1.25rem !important;
   }
-  
-  
+}

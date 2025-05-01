@@ -1,23 +1,46 @@
-<div class="container mt-4">
-    <div class="row align-items-center mb-4">
-      <!-- Teks Selamat Datang -->
-      <div class="col-md-6">
-        <h3 class="fw-semibold text-dark">👋 Selamat datang di <span class="text-primary">Ada Pinjam</span></h3>
-        <p class="text-muted">Pantau dan proses pengajuan pinjaman dengan efisien!</p>
-      </div>
-  
-      <!-- Gambar Animasi -->
-      <div class="col-md-6 text-center">
-        <lottie-player
-          src="https://lottie.host/db7b2a4a-1631-4224-9bbc-169c67fe9a34/uU499egcRr.json"
-          background="transparent"
-          speed="1"
-          style="width: 300px; height: 300px;"
-          loop
-          autoplay>
-        </lottie-player>
-      </div>
+<div class="container mt-5">
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h3 class="fw-semibold text-dark animate__animated animate__fadeInLeft">
+        👋 Selamat datang di 
+        <span class="text-primary">Ada Pinjam</span>
+      </h3>
+      <p class="text-muted animate__animated animate__fadeInLeft animate__delay-1s">
+        Pantau dan proses pengajuan pinjaman dengan efisien!
+      </p>
     </div>
-    
+    <div class="col-md-6 text-center animate__animated animate__fadeInRight">
+      <lottie-player
+        src="https://lottie.host/db7b2a4a-1631-4224-9bbc-169c67fe9a34/uU499egcRr.json"
+        background="transparent"
+        speed="1"
+        style="width: 300px; height: 300px;"
+        loop
+        autoplay>
+      </lottie-player>
+    </div>
   </div>
-  
+
+  <div class="row gy-4">
+    <ng-container *ngFor="let stat of [
+     { feature:'GET_ALL_EMPLOYEE', title:'Pegawai', value: totalStats.totalEmployees, icon:'bi-people', bg:'bg-gradient-primary' },
+      { feature:'GET_ALL_BRANCH', title:'Branches', value: totalStats.totalBranches, icon:'bi-building', bg:'bg-gradient-success' },
+      { feature:'GET_ALL_CUSTOMER', title:'Customers', value: totalStats.totalCustomers, icon:'bi-person', bg:'bg-gradient-warning' },
+      { feature:'REVIEW_HISTORY', title:'Pengajuan', value: totalStats.totalPengajuan, icon:'bi-file-earmark-text', bg:'bg-gradient-info' },
+      { feature:'GET_ALL_PLAFON', title:'Plafon', value: totalStats.totalPlafon, icon:'bi-cash-stack', bg:'bg-gradient-danger' },
+      { feature:'GET_ALL_ROLES', title:'Roles', value: totalStats.totalRoles, icon:'bi-sliders', bg:'bg-gradient-secondary' },
+    ]">
+      <div *ngIf="hasFeature(stat.feature)" class="col-sm-6 col-lg-4">
+        <div class="card text-white {{ stat.bg }} shadow animate__animated animate__zoomIn" style="border:none; border-radius:0.75rem; transition: transform .3s;">
+          <div class="card-body d-flex align-items-center">
+            <i class="bi {{ stat.icon }} fs-1 me-3"></i>
+            <div>
+              <h6 class="card-subtitle mb-1">{{ stat.title }}</h6>
+              <h3 class="card-title fw-bold mb-0">{{ stat.value }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

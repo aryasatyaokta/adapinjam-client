@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/service/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 declare var bootstrap: any;
 @Component({
   selector: 'app-akun-marketing',
@@ -42,6 +43,26 @@ export class AkunMarketingComponent implements OnInit {
   }
 
   updatePassword() {
+    if (!this.oldPassword.trim() || !this.newPassword.trim()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Field tidak boleh kosong',
+        text: 'Harap isi password lama dan password baru.',
+        confirmButtonText: 'Oke',
+      });
+      return;
+    }
+  
+    if (this.newPassword.length < 6) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Password Terlalu Pendek',
+        text: 'Password baru minimal harus 6 karakter.',
+        confirmButtonText: 'Oke',
+      });
+      return;
+    }
+  
     const token = this.authService.getToken();
     if (!token) return;
   
@@ -60,19 +81,28 @@ export class AkunMarketingComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          alert('Password berhasil diubah. Silakan login ulang.');
-  
-          // Tutup modal dengan cara aman
-          const modalElement = document.getElementById('updatePasswordModal');
-          if (modalElement) {
-            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement); // ini aman
-            modalInstance.hide();
-          }
-  
-          this.authService.logout();
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: 'Password berhasil diubah. Silakan login ulang.',
+            confirmButtonText: 'Oke',
+          }).then(() => {
+            // Tutup modal
+            const modalElement = document.getElementById('updatePasswordModal');
+            if (modalElement) {
+              const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+              modalInstance.hide();
+            }
+            this.authService.logout();
+          });
         },
         error: (err) => {
-          alert(err.error || 'Gagal memperbarui password.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Mengubah Password',
+            text: err.error || 'Terjadi kesalahan saat mengubah password.',
+            confirmButtonText: 'Coba Lagi',
+          });
         },
       });
   }

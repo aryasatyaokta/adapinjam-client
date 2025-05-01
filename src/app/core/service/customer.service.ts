@@ -17,8 +17,9 @@ export class CustomerService {
     });
   }
 
-  getAllCustomers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/all`, { headers: this.getAuthHeaders() });
+  getAllCustomers(headers?: HttpHeaders): Observable<any[]> {
+    const finalHeaders = headers ?? this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.baseUrl}/all`, { headers: finalHeaders });
   }
 
   getCustomerById(id: string): Observable<any> {

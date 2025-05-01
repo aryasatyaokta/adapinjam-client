@@ -22,15 +22,15 @@ export class PengajuanMarketingService {
     this.notifikasiTrigger.next(); // untuk trigger refresh
   }
 
-  getReviewHistory(): Observable<any[]> {
+  getReviewHistory(headers?: HttpHeaders): Observable<any[]> {
     const token = this.authService.getToken();
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+    const finalHeaders = headers ?? new HttpHeaders({
+      Authorization: `Bearer ${token}`
     });
-
-    return this.http.get<any[]>(`${this.baseUrl}/review-history`, { headers });
+  
+    return this.http.get<any[]>(`${this.baseUrl}/review-history`, { headers: finalHeaders });
   }
+  
 
   reviewPengajuan(pengajuanId: string, data: { approved: boolean; catatan: string }): Observable<any> {
     const token = this.authService.getToken();

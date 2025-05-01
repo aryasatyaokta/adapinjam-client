@@ -49,6 +49,11 @@ export class FeaturePlafonComponent implements OnInit {
 
   onSubmit() {
     const formValue = this.plafonForm.value;
+    
+    // Validasi input
+    if (!this.isFormValid()) {
+      return;  // Tidak lanjut jika form tidak valid
+    }
   
     // Show SweetAlert confirmation before submitting the form
     Swal.fire({
@@ -99,7 +104,7 @@ export class FeaturePlafonComponent implements OnInit {
             }
           });
         }
-  
+    
         // Reset the form and clear the selectedPlafon
         this.plafonForm.reset();
         this.selectedPlafon = null;
@@ -111,6 +116,40 @@ export class FeaturePlafonComponent implements OnInit {
         );
       }
     });
+  }
+  
+  isFormValid(): boolean {
+    if (!this.plafonForm.value.jenisPlafon || this.plafonForm.value.jenisPlafon.trim() === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Jenis Plafon Harus Dipilih!',
+        text: 'Silakan pilih jenis plafon.',
+        confirmButtonText: 'Oke',
+      });
+      return false;
+    }
+  
+    if (this.plafonForm.value.jumlahPlafon <= 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Jumlah Plafon Harus Lebih Besar dari 0!',
+        text: 'Silakan masukkan jumlah plafon yang valid.',
+        confirmButtonText: 'Oke',
+      });
+      return false;
+    }
+  
+    if (this.plafonForm.value.bunga <= 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Bunga Harus Lebih Besar dari 0!',
+        text: 'Silakan masukkan bunga yang valid.',
+        confirmButtonText: 'Oke',
+      });
+      return false;
+    }
+  
+    return true;
   }
   
 
@@ -142,6 +181,11 @@ export class FeaturePlafonComponent implements OnInit {
       default:
         return 'bi bi-box-fill';
     }
+  }
+
+  hasFeature(feature: string): boolean {
+    const features = JSON.parse(localStorage.getItem('features') || '[]');
+    return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
   }
   
 }

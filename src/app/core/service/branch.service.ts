@@ -18,8 +18,9 @@ export class BranchService {
     });
   }
 
-  getAllBranches(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, { headers: this.getAuthHeaders() });
+  getAllBranches(headers?: HttpHeaders): Observable<any> {
+    const finalHeaders = headers ?? this.getAuthHeaders();
+    return this.http.get<any>(this.apiUrl, { headers: finalHeaders });
   }
 
   getBranchById(id: string): Observable<any> {

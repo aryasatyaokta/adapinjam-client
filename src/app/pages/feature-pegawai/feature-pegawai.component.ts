@@ -200,13 +200,28 @@ export class FeaturePegawaiComponent implements OnInit {
     });
   }  
 
-  isFormValid() {
-    if (!this.employeeToEdit.name || !this.employeeToEdit.email || !this.employeeToEdit.nip || !this.employeeToEdit.role || !this.employeeToEdit.branch) {
-      alert("Please fill in all the required fields!");
+  isFormValid(): boolean {
+    const missingFields = [];
+  
+    if (!this.employeeToEdit.name) missingFields.push('Nama');
+    if (!this.employeeToEdit.email) missingFields.push('Email');
+    if (!this.employeeToEdit.nip) missingFields.push('NIP');
+    if (!this.employeeToEdit.role) missingFields.push('Role');
+    if (!this.employeeToEdit.branch) missingFields.push('Cabang');
+  
+    if (missingFields.length > 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data Tidak Lengkap!',
+        html: `Silakan isi terlebih dahulu field berikut:<br><b>${missingFields.join(', ')}</b>`,
+        confirmButtonText: 'Oke',
+      });
       return false;
     }
+  
     return true;
   }
+  
 
   deleteEmployee(id: string) {
     if (confirm('Are you sure you want to delete this employee?')) {
@@ -250,4 +265,10 @@ export class FeaturePegawaiComponent implements OnInit {
     const filteredEmployees = this.searchEmployees();
     this.totalPages = Math.ceil(filteredEmployees.length / this.itemsPerPage);
   }
+
+  hasFeature(feature: string): boolean {
+    const features = JSON.parse(localStorage.getItem('features') || '[]');
+    return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
+  }
+
 }

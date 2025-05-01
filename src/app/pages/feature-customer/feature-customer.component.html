@@ -7,7 +7,7 @@
     </div>
   
     <!-- Table of Customers -->
-    <div class="table-responsive shadow-sm rounded">
+    <div *ngIf="hasFeature('GET_ALL_CUSTOMER')" class="table-responsive shadow-sm rounded">
       <table class="table table-striped table-hover align-middle border">
         <thead class="text-center">
           <tr>
@@ -27,7 +27,7 @@
             <td>{{ customer.nik }}</td>
             <td>{{ customer.pekerjaan }}</td>
             <td>
-                <button class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
+                <button *ngIf="hasFeature('GET_CUSTOMER_BY_ID')" class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
               </td>
           </tr>
           <tr *ngIf="filteredCustomers.length === 0">

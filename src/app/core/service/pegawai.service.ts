@@ -18,9 +18,10 @@ export class PegawaiService {
     });
   }
 
-  getAllEmployees(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/all`, { headers: this.getAuthHeaders() });
-  }
+  getAllEmployees(headers?: HttpHeaders): Observable<any> {
+    const finalHeaders = headers ?? this.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/all`, { headers: finalHeaders });
+  }  
 
   addEmployee(employee: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/add`, employee, { headers: this.getAuthHeaders() });

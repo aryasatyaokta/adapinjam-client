@@ -74,6 +74,17 @@ export class PengajuanMarketingComponent implements OnInit {
   submitReview(isApproved: boolean): void {
     if (!this.selectedReviewItem) return;
   
+    // Validasi input catatan
+    if (!this.reviewCatatan.trim()) {
+      Swal.fire({
+        title: 'Catatan Tidak Boleh Kosong',
+        text: 'Silakan isi catatan sebelum mengirim review.',
+        icon: 'warning',
+        confirmButtonText: 'Oke',
+      });
+      return;
+    }
+  
     this.pengajuanService.reviewPengajuan(this.selectedReviewItem, {
       approved: isApproved,
       catatan: this.reviewCatatan,
@@ -84,11 +95,9 @@ export class PengajuanMarketingComponent implements OnInit {
       error: (err) => {
         console.error('Gagal review:', err);
   
-        // If error message indicates already processed or status 200, assume success
         if (err?.error?.message?.includes('sudah diproses') || err?.status === 200) {
           this.onReviewSuccess();
         } else {
-          // Show error notification
           Swal.fire({
             title: 'Terjadi Kesalahan',
             text: 'Gagal mengirim review. Silakan coba lagi.',

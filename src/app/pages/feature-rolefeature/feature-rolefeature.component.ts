@@ -169,6 +169,9 @@ export class FeatureRolefeatureComponent {
     });
   }
   
-  
+  hasFeature(feature: string): boolean {
+    const features = JSON.parse(localStorage.getItem('features') || '[]');
+    return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
+  }
   
 }

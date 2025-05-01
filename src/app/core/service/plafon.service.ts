@@ -24,9 +24,11 @@ export class PlafonService {
     });
   }
 
-  getAllPlafons(): Observable<Plafon[]> {
-    return this.http.get<Plafon[]>(this.baseUrl, { headers: this.getAuthHeaders() });
+  getAllPlafons(headers?: HttpHeaders): Observable<Plafon[]> {
+    const finalHeaders = headers ?? this.getAuthHeaders();
+    return this.http.get<Plafon[]>(this.baseUrl, { headers: finalHeaders });
   }
+  
 
   createPlafon(plafon: Partial<Plafon>): Observable<Plafon> {
     return this.http.post<Plafon>(this.baseUrl, plafon, { headers: this.getAuthHeaders() });

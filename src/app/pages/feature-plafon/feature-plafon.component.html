@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <h4 class="bi bi-cash-stack mb-3"> Data Plafon</h4>
-    <button class="btn btn-primary" (click)="onAdd()">
+    <button *ngIf="hasFeature('CREATE_PLAFON')" class="btn btn-primary" (click)="onAdd()">
         <i class="bi bi-plus-circle me-1"></i>Tambah Plafon
     </button>
   
@@ -21,7 +21,7 @@
       </div>
     </form>
   
-    <div class="row g-4">
+    <div *ngIf="hasFeature('GET_ALL_PLAFON')" class="row g-4">
         <div class="col-md-3" *ngFor="let plafon of plafons">
             <div class="card text-white h-100" [ngClass]="getColorClass(plafon.jenisPlafon)">
 
@@ -34,7 +34,7 @@
                 <p class="card-text mb-1"><strong>Jumlah:</strong> Rp {{ plafon.jumlahPlafon | number }}</p>
                 <p class="card-text mb-0"><strong>Bunga:</strong> {{ plafon.bunga }}%</p>
               </div>
-              <button class="btn btn-light btn-sm mt-auto" (click)="onEdit(plafon)">
+              <button *ngIf="hasFeature('UPDATE_PLAFON')" class="btn btn-light btn-sm mt-auto" (click)="onEdit(plafon)">
                 <i class="bi bi-pencil-fill me-1"></i> Edit
               </button>
             </div>

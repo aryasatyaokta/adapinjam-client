@@ -20,12 +20,12 @@ export class FeatureService {
     private authService: AuthService
   ) {}
 
-  getAllFeatures(): Observable<Feature[]> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+  getAllFeatures(headers?: HttpHeaders): Observable<Feature[]> {
+    const finalHeaders = headers ?? new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
     });
-
-    return this.http.get<Feature[]>(this.baseUrl, { headers });
+  
+    return this.http.get<Feature[]>(this.baseUrl, { headers: finalHeaders });
   }
+  
 }
