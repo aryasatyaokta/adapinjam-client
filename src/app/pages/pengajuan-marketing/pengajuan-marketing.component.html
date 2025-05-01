@@ -19,10 +19,10 @@
           <td>{{ item.bunga }}%</td>
           <td>{{ item.angsuran | currency: 'IDR' }}</td>
           <td>
-            <button class="btn btn-sm btn-warning me-1" (click)="openDetailModal(item)" data-bs-toggle="modal" data-bs-target="#detailModal">
+            <!-- <button class="btn btn-sm btn-warning me-1" (click)="openDetailModal(item)" data-bs-toggle="modal" data-bs-target="#detailModal">
               Lihat Detail
-            </button>
-            <button class="btn btn-sm btn-outline-primary" (click)="handleReview(item.pengajuanId)">
+            </button> -->
+            <button class="btn btn-sm btn-outline-primary" (click)="handleReview(item.pengajuanId); openDetailModal(item) ">
               Review
             </button>
           </td>
@@ -59,12 +59,12 @@
   
 </div>
 
-<!-- Modal Detail -->
-<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+<!-- Modal Review -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="detailModalLabel">Detail Pengajuan & Customer</h5>
+        <h5 class="modal-title" id="detailModalLabel">Review Pengajuan</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body" *ngIf="selectedItem">
@@ -106,21 +106,22 @@
           </div>
         </div>
 
+              <!-- Card: Riwayat Review -->
+      <div class="card mt-4 shadow-sm border-0">
+        <div class="card-header bg-warning text-dark fw-semibold">
+          Riwayat Review
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-12" *ngFor="let review of selectedItem?.reviewNotes">
+              <strong>{{ review.role }}:</strong>
+              <p class="mb-1 text-muted fst-italic">
+                {{ review.catatan || 'Belum ada catatan' }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Review -->
-<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="reviewModalLabel">Review Pengajuan</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">

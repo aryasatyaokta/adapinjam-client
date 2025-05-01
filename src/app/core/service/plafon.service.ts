@@ -7,6 +7,7 @@ export interface Plafon {
   jenisPlafon: string;
   jumlahPlafon: number;
   bunga: number;
+  deleted: boolean;
 }
 
 @Injectable({
@@ -28,7 +29,6 @@ export class PlafonService {
     const finalHeaders = headers ?? this.getAuthHeaders();
     return this.http.get<Plafon[]>(this.baseUrl, { headers: finalHeaders });
   }
-  
 
   createPlafon(plafon: Partial<Plafon>): Observable<Plafon> {
     return this.http.post<Plafon>(this.baseUrl, plafon, { headers: this.getAuthHeaders() });
@@ -37,4 +37,8 @@ export class PlafonService {
   updatePlafon(id: number, plafon: Partial<Plafon>): Observable<Plafon> {
     return this.http.put<Plafon>(`${this.baseUrl}/update/${id}`, plafon, { headers: this.getAuthHeaders() });
   }
+
+  deletePlafon(id: number): Observable<Plafon> {
+    return this.http.delete<Plafon>(`${this.baseUrl}/delete/${id}`, { headers: this.getAuthHeaders() });
+  }  
 }

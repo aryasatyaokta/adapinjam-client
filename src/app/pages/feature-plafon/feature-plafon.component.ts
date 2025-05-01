@@ -151,7 +151,44 @@ export class FeaturePlafonComponent implements OnInit {
   
     return true;
   }
-  
+
+  onDelete(plafon: Plafon) {
+    // Menampilkan konfirmasi sebelum menghapus
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: `Ingin menghapus plafon ${plafon.jenisPlafon}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus',
+      cancelButtonText: 'Batal',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.plafonService.deletePlafon(plafon.idPlafon).subscribe({
+          next: () => {
+            Swal.fire(
+              'Berhasil!',
+              'Plafon berhasil dihapus.',
+              'success'
+            );
+            this.loadPlafons(); // Memuat ulang data plafon
+          },
+          error: (err) => {
+            Swal.fire(
+              'Gagal!',
+              'Terjadi kesalahan saat menghapus data plafon.',
+              'error'
+            );
+          }
+        });
+      } else {
+        Swal.fire(
+          'Dibatalkan!',
+          'Proses penghapusan data plafon dibatalkan.',
+          'info'
+        );
+      }
+    });
+  }  
 
   getColorClass(jenis: string): string {
     switch (jenis.toLowerCase()) {

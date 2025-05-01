@@ -85,29 +85,42 @@ export class PengajuanMarketingComponent implements OnInit {
       return;
     }
   
-    this.pengajuanService.reviewPengajuan(this.selectedReviewItem, {
-      approved: isApproved,
-      catatan: this.reviewCatatan,
-    }).subscribe({
-      next: () => {
-        this.onReviewSuccess();
-      },
-      error: (err) => {
-        console.error('Gagal review:', err);
+    // Menampilkan konfirmasi untuk menyetujui review
+    Swal.fire({
+      title: 'Konfirmasi Review',
+      text: 'Apakah Anda yakin ingin mengirim review ini?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Kirim Review',
+      cancelButtonText: 'Tidak',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.pengajuanService.reviewPengajuan(this.selectedReviewItem, {
+          approved: isApproved,
+          catatan: this.reviewCatatan,
+        }).subscribe({
+          next: () => {
+            this.onReviewSuccess();
+          },
+          error: (err) => {
+            console.error('Gagal review:', err);
   
-        if (err?.error?.message?.includes('sudah diproses') || err?.status === 200) {
-          this.onReviewSuccess();
-        } else {
-          Swal.fire({
-            title: 'Terjadi Kesalahan',
-            text: 'Gagal mengirim review. Silakan coba lagi.',
-            icon: 'error',
-            confirmButtonText: 'Coba Lagi',
-          });
-        }
-      },
+            if (err?.error?.message?.includes('sudah diproses') || err?.status === 200) {
+              this.onReviewSuccess();
+            } else {
+              Swal.fire({
+                title: 'Terjadi Kesalahan',
+                text: 'Gagal mengirim review. Silakan coba lagi.',
+                icon: 'error',
+                confirmButtonText: 'Coba Lagi',
+              });
+            }
+          },
+        });
+      }
     });
   }
+  
   
   
   private onReviewSuccess(): void {
@@ -129,4 +142,5 @@ export class PengajuanMarketingComponent implements OnInit {
     const modal = new (window as any).bootstrap.Modal(reviewModalEl);
     modal.hide();
   }  
+  
 }
