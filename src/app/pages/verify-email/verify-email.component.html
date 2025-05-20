@@ -1,0 +1,9 @@
+<div class="container text-center mt-5">
+    <ng-container [ngSwitch]="status">
+      <p *ngSwitchCase="'loading'">⏳ Memverifikasi email Anda...</p>
+      <p *ngSwitchCase="'success'" class="text-success">✅ Email Anda berhasil diverifikasi! Silakan login.</p>
+      <!-- <p *ngSwitchCase="'success'" class="text-danger">✅ Email Anda berhasil diverifikasi! Silakan login.</p> -->
+      <p *ngSwitchCase="'invalid'" class="text-warning">⚠️ Token tidak ditemukan.</p>
+    </ng-container>
+  </div>
+  

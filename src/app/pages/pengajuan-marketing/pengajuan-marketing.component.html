@@ -76,10 +76,12 @@
           </div>
           <div class="card-body">
             <div class="row g-2">
-              <div class="col-md-6"><strong>Jumlah Pengajuan:</strong> {{ selectedItem.amount | currency:'IDR' }}</div>
+              <div class="col-md-6"><strong>Jumlah Pengajuan:</strong> {{ selectedItem.amount | currency:'Rp ' }}</div>
               <div class="col-md-6"><strong>Tenor:</strong> {{ selectedItem.tenor }} bulan</div>
               <div class="col-md-6"><strong>Bunga:</strong> {{ selectedItem.bunga }}%</div>
-              <div class="col-md-6"><strong>Angsuran:</strong> {{ selectedItem.angsuran | currency:'IDR' }}</div>
+              <div class="col-md-6"><strong>Angsuran:</strong> {{ selectedItem.angsuran | currency:'Rp ' }}</div>
+              <div class="col-md-6"><strong>Biaya Admin:</strong> {{ selectedItem.biayaAdmin | currency:'Rp ' }}</div>
+              <div class="col-md-6"><strong>Dana Diterima:</strong> {{ selectedItem.totalDanaDidapat | currency:'Rp ' }}</div>
             </div>
           </div>
         </div>
@@ -91,21 +93,30 @@
           </div>
           <div class="card-body">
             <div class="row g-3">
-              <div class="col-md-6"><strong>Nama:</strong> {{ selectedItem.customer?.namaCustomer }}</div>
+               <div class="col-md-6">
+                <strong>Foto KTP:</strong><br>
+                 <img [src]="selectedItem.customer?.fotoKtp" alt="Foto KTP" class="img-fluid" 
+                   *ngIf="selectedItem.customer?.fotoKtp" style="max-width: 200px; height: auto;">
+               </div>
+              <div class="col-md-6">
+                <strong>Foto Selfie dengan KTP:</strong><br>
+                <img [src]="selectedItem.customer?.fotoSelfie" alt="Foto KTP" class="img-fluid" *ngIf="selectedItem.customer?.fotoSelfie">
+              </div>
+              <div class="col-md-6"><strong>Nama:</strong> {{ selectedItem.customer?.nama }}</div>
               <div class="col-md-6"><strong>NIK:</strong> {{ selectedItem.customer?.nik }}</div>
-              <div class="col-md-6"><strong>Tempat/Tgl Lahir:</strong> {{ selectedItem.customer?.tempatTglLahir }}</div>
+              <div class="col-md-6"><strong>Tempat Lahir:</strong> {{ selectedItem.customer?.tempatLahir }}</div>
+               <div class="col-md-6"><strong>Tanggal Lahir:</strong> {{ selectedItem.customer?.tanggalLahir }}</div>
               <div class="col-md-6"><strong>No Telp:</strong> {{ selectedItem.customer?.noTelp }}</div>
               <div class="col-md-12"><strong>Alamat:</strong> {{ selectedItem.customer?.alamat }}</div>
               <div class="col-md-6"><strong>Nama Ibu Kandung:</strong> {{ selectedItem.customer?.namaIbuKandung }}</div>
               <div class="col-md-6"><strong>Pekerjaan:</strong> {{ selectedItem.customer?.pekerjaan }}</div>
-              <div class="col-md-6"><strong>Gaji:</strong> {{ selectedItem.customer?.gaji }}</div>
+              <div class="col-md-6"><strong>Gaji:</strong> {{ selectedItem.customer?.gaji | currency:'Rp '}}</div>
               <div class="col-md-6"><strong>No Rekening:</strong> {{ selectedItem.customer?.noRek }}</div>
               <div class="col-md-6"><strong>Status Rumah:</strong> {{ selectedItem.customer?.statusRumah }}</div>
-              <div class="col-md-6"><strong>Sisa Plafon:</strong> {{ selectedItem.customer?.sisaPlafon | currency:'IDR' }}</div>
+              <div class="col-md-6"><strong>Sisa Plafon:</strong> {{ selectedItem.customer?.sisaPlafon | currency:'Rp ' }}</div>
             </div>
           </div>
         </div>
-
               <!-- Card: Riwayat Review -->
       <div class="card mt-4 shadow-sm border-0">
         <div class="card-header bg-warning text-dark fw-semibold">

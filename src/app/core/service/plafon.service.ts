@@ -14,7 +14,8 @@ export interface Plafon {
   providedIn: 'root'
 })
 export class PlafonService {
-  private baseUrl = 'http://localhost:8080/api/v1/plafon';
+  // private baseUrl = 'http://35.223.1.74/be/api/v1/plafon';
+  private baseUrl = 'http://localhost:8080/be/api/v1/plafon';
 
   constructor(private http: HttpClient) {}
 

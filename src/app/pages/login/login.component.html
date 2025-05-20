@@ -39,3 +39,38 @@
     </div>
   </form>
 </div>
+
+<div class="modal fade" id="updatePasswordModal" tabindex="-1" aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="updatePasswordModalLabel">Ubah Password</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="oldPassword" class="form-label">Password Lama</label>
+          <input
+            type="password"
+            class="form-control"
+            id="oldPassword"
+            [(ngModel)]="oldPassword"
+            placeholder="Masukkan password lama" />
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Password Baru</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPassword"
+            [(ngModel)]="newPassword"
+            placeholder="Masukkan password baru" />
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-primary" (click)="updatePassword()">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

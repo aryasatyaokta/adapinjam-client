@@ -30,7 +30,15 @@ export const routes: Routes = [
   {
     path: 'reset-password/:token',
     loadComponent: () => import('../app/pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
-  },    
+  },
+  {
+    path: 'verify-email',
+    loadComponent: () => import('../app/pages/verify-email/verify-email.component').then(m => m.VerifyEmailComponent)
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () => import('../app/pages/reset-password-cust/reset-password-cust.component').then(m => m.ResetPasswordCustComponent)
+  },        
   {
     path: '', component: ShellComponent, children: [
       { path: 'dashboard', component: DashboardComponent },

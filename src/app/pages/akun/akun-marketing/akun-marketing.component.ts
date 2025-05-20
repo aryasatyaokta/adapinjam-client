@@ -30,7 +30,7 @@ export class AkunMarketingComponent implements OnInit {
       Authorization: `Bearer ${token}`
     };
   
-    this.http.get<any>('http://localhost:8080/api/v1/user-employee/get-employee', { headers }).subscribe({
+    this.http.get<any>('http://localhost:8080/be/api/v1/user-employee/get-employee', { headers }).subscribe({
       next: (data) => {
         this.userData = data;
         this.loading = false;
@@ -72,7 +72,7 @@ export class AkunMarketingComponent implements OnInit {
   
     this.http
       .put(
-        'http://localhost:8080/api/v1/auth/update-password',
+        'http://localhost:8080/be/api/v1/auth/update-password',
         {
           oldPassword: this.oldPassword,
           newPassword: this.newPassword,

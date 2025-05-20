@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BranchService {
-  private apiUrl = 'http://localhost:8080/api/v1/branches'; // URL sesuai dengan endpoint yang kamu beri
+  // private apiUrl = 'http://35.223.1.74/be/api/v1/branches';
+   private apiUrl = 'http://localhost:8080/be/api/v1/branches';
 
   constructor(private http: HttpClient) {}
 

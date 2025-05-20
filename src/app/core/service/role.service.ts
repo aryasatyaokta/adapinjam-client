@@ -7,8 +7,11 @@ import { forkJoin } from 'rxjs';
   providedIn: 'root'
 })
 export class RoleService {
-  private apiUrl = 'http://localhost:8080/api/v1/roles'; // URL endpoint for roles
-  private featuresUrl = 'http://localhost:8080/api/v1/features'; // URL endpoint for features
+  // private apiUrl = 'http://35.223.1.74/be/api/v1/roles'; // URL endpoint for roles
+  // private featuresUrl = 'http://35.223.1.74/be/api/v1/features'; // URL endpoint for features
+
+  private apiUrl = 'http://localhost:8080/be/api/v1/roles'; // URL endpoint for roles
+  private featuresUrl = 'http://localhost:8080/be/api/v1/features'; // URL endpoint for features
 
   constructor(private http: HttpClient) {}
 
