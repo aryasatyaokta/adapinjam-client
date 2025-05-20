@@ -18,6 +18,9 @@ export class AkunMarketingComponent implements OnInit {
   oldPassword: string = '';
   newPassword: string = '';
 
+  showPasswordLama: boolean = false
+  showPasswordBaru: boolean = false;
+
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {

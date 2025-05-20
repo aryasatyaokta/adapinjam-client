@@ -80,4 +80,19 @@ body {
       font-size: 15px;
     }
   }
-  
+
+ .password-toggle-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  cursor: pointer;
+  z-index: 10;
+  border-left: 1px solid #ced4da;
+}
+
+.password-toggle-icon i {
+  font-size: 1.1rem;
+  color: #6c757d;
+}

@@ -22,6 +22,10 @@ export class LoginComponent {
   oldPassword: string = '';
   newPassword: string = '';
 
+  showPassword: boolean = false;
+  showPasswordLama: boolean = false;
+  showPasswordBaru: boolean = false;
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,

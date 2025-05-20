@@ -18,6 +18,10 @@ export class ResetPasswordComponent implements OnInit {
   message: string | null = null;
   error: string | null = null;
 
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
