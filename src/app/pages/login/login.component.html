@@ -54,42 +54,38 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
           <label for="oldPassword" class="form-label">Password Lama</label>
-          <div class="form-group position-relative">
-            <input
-              formControlName="password"
-              [type]="showPasswordLama ? 'text' : 'password'"
-              class="form-control item"
-              id="password"
-              placeholder="Password"
-            />
-            <i
-              class="bi"
-              [ngClass]="showPasswordLama ? 'bi-eye-slash' : 'bi-eye'"
-              (click)="showPasswordLama = !showPasswordLama"
-              style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"
-            ></i>
-          </div>
+          <input
+            [type]="showPasswordLama ? 'text' : 'password'"
+            class="form-control"
+            id="oldPassword"
+            [(ngModel)]="oldPassword"
+            placeholder="Masukkan password lama" />
+          <i
+            class="bi"
+            [ngClass]="showPasswordLama ? 'bi-eye-slash' : 'bi-eye'"
+            (click)="showPasswordLama = !showPasswordLama"
+            style="position: absolute; top: 50%; right: 10px; transform: translateY(10%); cursor: pointer;">
+          </i>
         </div>
-        <div class="mb-3">
+
+        <div class="mb-3 position-relative">
           <label for="newPassword" class="form-label">Password Baru</label>
-          <div class="form-group position-relative">
-            <input
-              formControlName="password"
-              [type]="showPasswordBaru ? 'text' : 'password'"
-              class="form-control item"
-              id="password"
-              placeholder="Password"
-            />
-            <i
-              class="bi"
-              [ngClass]="showPasswordBaru ? 'bi-eye-slash' : 'bi-eye'"
-              (click)="showPasswordBaru = !showPasswordBaru"
-              style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"
-            ></i>
-          </div>
+          <input
+            [type]="showPasswordBaru ? 'text' : 'password'"
+            class="form-control"
+            id="newPassword"
+            [(ngModel)]="newPassword"
+            placeholder="Masukkan password baru" />
+          <i
+            class="bi"
+            [ngClass]="showPasswordBaru ? 'bi-eye-slash' : 'bi-eye'"
+            (click)="showPasswordBaru = !showPasswordBaru"
+            style="position: absolute; top: 50%; right: 10px; transform: translateY(10%); cursor: pointer;">
+          </i>
         </div>
+
         <div class="d-flex justify-content-end">
           <button class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Batal</button>
           <button class="btn btn-primary" (click)="updatePassword()">Simpan</button>

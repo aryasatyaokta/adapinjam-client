@@ -64,4 +64,12 @@ export class RoleService {
   getAllFeatures(): Observable<any> {
     return this.http.get<any>(this.featuresUrl, { headers: this.getAuthHeaders() });
   }
+
+  deleteRoleById(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/delete/${id}`, {
+    headers: this.getAuthHeaders(),
+    responseType: 'text' as 'json'
+  });
+}
+
 }

@@ -23,6 +23,9 @@ export class FeatureRolefeatureComponent {
   selectedFeatureIds: number[] = [];
   newRoleName: string = '';
 
+  groupedFeatures: { [key: string]: any[] } = {};
+  featuresForRoleGrouped: { [key: string]: any[] } = {};
+
   constructor(
     private roleService: RoleService,
     private featureService: FeatureService,
@@ -43,6 +46,7 @@ export class FeatureRolefeatureComponent {
   loadAllFeatures(): void {
     this.featureService.getAllFeatures().subscribe((data) => {
       this.features = data;
+      this.groupFeatures();
     });
   }
 
@@ -105,6 +109,37 @@ export class FeatureRolefeatureComponent {
     this.roleService.getFeaturesByRole(roleId).subscribe((data) => {
       this.featuresForRole = data;
 
+      // Kelompokkan fitur berdasarkan kategori (seperti groupedFeatures)
+      const groupKeywords = [
+        { key: 'BRANCH', keyword: 'BRANCH' },
+        { key: 'CUSTOMER', keyword: 'CUSTOMER' },
+        { key: 'EMPLOYEE', keyword: 'EMPLOYEE' },
+        { key: 'FEATURES', keyword: 'ROLES_FEATURES' },
+        { key: 'HISTORY', keyword: 'HISTORY' },
+        { key: 'PENGAJUAN', keyword: 'PENGAJUAN' },
+        { key: 'PLAFON', keyword: 'PLAFON' },
+        { key: 'ROLES', keyword: 'ROLES' },
+      ];
+
+      this.featuresForRoleGrouped = {}; // Reset group
+
+      for (const feature of data) {
+        let matchedGroup = 'OTHERS';
+        for (const group of groupKeywords) {
+          if (feature.name.includes(group.keyword)) {
+            matchedGroup = group.key;
+            break;
+          }
+        }
+
+        if (!this.featuresForRoleGrouped[matchedGroup]) {
+          this.featuresForRoleGrouped[matchedGroup] = [];
+        }
+
+        this.featuresForRoleGrouped[matchedGroup].push(feature);
+      }
+
+      // Tampilkan modal
       if (isPlatformBrowser(this.platformId)) {
         const modalElement = document.getElementById('featuresModal');
         if (modalElement) {
@@ -114,6 +149,7 @@ export class FeatureRolefeatureComponent {
       }
     });
   }
+
 
   onFeatureChange(featureId: number, event: any): void {
     if (event.target.checked) {
@@ -173,5 +209,75 @@ export class FeatureRolefeatureComponent {
     const features = JSON.parse(localStorage.getItem('features') || '[]');
     return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
   }
+
+  groupFeatures(): void {
+    const groupKeywords = [
+      { key: 'BRANCH', keyword: 'BRANCH' },
+      { key: 'CUSTOMER', keyword: 'CUSTOMER' },
+      { key: 'EMPLOYEE', keyword: 'EMPLOYEE' },
+      { key: 'FEATURES', keyword: 'ROLES_FEATURES' },
+      { key: 'HISTORY', keyword: 'HISTORY' },
+      { key: 'PENGAJUAN', keyword: 'PENGAJUAN' },
+      { key: 'PLAFON', keyword: 'PLAFON' },
+      { key: 'ROLES', keyword: 'ROLES' },
+    ];
+
+    this.groupedFeatures = {};
+
+    for (const feature of this.features) {
+      let matchedGroup = 'OTHERS'; // Default group if no match
+
+      for (const group of groupKeywords) {
+        if (feature.name.includes(group.keyword)) {
+          matchedGroup = group.key;
+          break;
+        }
+      }
+
+      if (!this.groupedFeatures[matchedGroup]) {
+        this.groupedFeatures[matchedGroup] = [];
+      }
+
+      this.groupedFeatures[matchedGroup].push(feature);
+    }
+  }
+
+  deleteRole(roleId: number): void {
+      Swal.fire({
+        title: 'Anda yakin?',
+        text: 'Role ini akan dihapus beserta semua fitur yang terkait.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.roleService.deleteRoleById(roleId).subscribe({
+            next: () => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Role berhasil dihapus.',
+                timer: 1500,
+                showConfirmButton: false
+              });
+              this.loadRoles();
+            },
+            error: (err) => {
+              console.error('Gagal menghapus role:', err);
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: 'Terjadi kesalahan saat menghapus role.'
+              });
+            }
+          });
+        }
+      });
+    }
+
   
 }
+

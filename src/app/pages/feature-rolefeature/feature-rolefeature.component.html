@@ -1,9 +1,9 @@
 <div class="container mt-4">
-  <h4 class="bi bi-sliders mb-3">Data Role</h4>
+  <h4 class="bi bi-sliders mb-3">Data Role dan Fitur</h4>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <button *ngIf="hasFeature('CREATE_ROLES_FEATURES')" class="btn btn-primary" (click)="addRoleModal()">
-      <i class="bi bi-plus-circle me-1"></i> Tambah Role
+      <i class="bi bi-plus-circle me-1"></i> Tambah Role Fitur
     </button>
   </div>
 
@@ -13,6 +13,7 @@
         <tr style="background-color: #0d6efd; color: white;">
           <th>Nama Role</th>
           <th>Lihat Fitur</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -22,10 +23,17 @@
             <button *ngIf="hasFeature('GET_ALL_ROLES')" class="btn btn-sm btn-outline-primary" (click)="loadFeaturesForRole(role.id)">
               <i class="bi bi-eye"></i> View Features
             </button>
-             <button *ngIf="hasFeature('UPDATE_ROLES_FEATURES')" class="btn btn-sm btn-outline-warning ms-2" (click)="openUpdateRoleModal(role.id)">
-      <i class="bi bi-pencil-square"></i> Edit Role
-    </button>
           </td>
+          <td>
+            <button *ngIf="hasFeature('UPDATE_ROLES_FEATURES')" class="btn btn-sm btn-warning" (click)="openUpdateRoleModal(role.id)">
+              <i class="bi bi-pencil-square"></i> Edit Role
+             </button>
+            <button *ngIf="hasFeature('DELETE_ROLES_FEATURES')" class="btn btn-sm btn-outline-danger ms-2"
+                    (click)="deleteRole(role.id)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+
         </tr>
       </tbody>
     </table>
@@ -47,19 +55,26 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Select Features</label>
-              <div *ngFor="let feature of features" class="form-check">
-                <input 
-                  class="form-check-input"
-                  type="checkbox"
-                  [value]="feature.id"
-                  (change)="onFeatureChange(feature.id, $event)"
-                  id="feature{{feature.id}}"
-                />
-                <label class="form-check-label" [for]="'feature' + feature.id">
-                  {{ feature.name }}
-                </label>
+
+              <div *ngFor="let group of groupedFeatures | keyvalue">
+                <div class="border rounded p-2 mb-3">
+                  <h6 class="text-primary fw-bold">{{ group.key }}</h6>
+                  <div *ngFor="let feature of group.value" class="form-check">
+                    <input 
+                      class="form-check-input"
+                      type="checkbox"
+                      [value]="feature.id"
+                      (change)="onFeatureChange(feature.id, $event)"
+                      [id]="'feature' + feature.id"
+                    />
+                    <label class="form-check-label" [for]="'feature' + feature.id">
+                      {{ feature.name }}
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="d-flex justify-content-end">
               <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-primary">Add Role</button>
@@ -79,19 +94,18 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Feature Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let feature of featuresForRole">
-                <td>{{ feature.name }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div *ngFor="let group of featuresForRoleGrouped | keyvalue">
+            <div class="border rounded p-2 mb-3">
+              <h6 class="text-primary fw-bold">{{ group.key }}</h6>
+              <ul class="mb-0 ps-3">
+                <li *ngFor="let feature of group.value">
+                  {{ feature.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -113,19 +127,28 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Select Features</label>
-            <div *ngFor="let feature of features" class="form-check">
-              <input 
-                class="form-check-input"
-                type="checkbox"
-                [value]="feature.id"
-                (change)="onFeatureChange(feature.id, $event)"
-                [checked]="selectedFeatureIds.includes(feature.id)"
-              />
-              <label class="form-check-label" [for]="'updateFeature' + feature.id">
-                {{ feature.name }}
-              </label>
+
+            <div *ngFor="let group of groupedFeatures | keyvalue">
+              <div class="border rounded p-2 mb-3">
+                <h6 class="text-primary fw-bold">{{ group.key }}</h6>
+                <div *ngFor="let feature of group.value" class="form-check">
+                  <input 
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'updateFeature' + feature.id"
+                    [value]="feature.id"
+                    (change)="onFeatureChange(feature.id, $event)"
+                    [checked]="selectedFeatureIds.includes(feature.id)"
+                  />
+
+                  <label class="form-check-label" [for]="'updateFeature' + feature.id">
+                    {{ feature.name }}
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary">Update Role</button>
