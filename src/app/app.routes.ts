@@ -19,10 +19,12 @@ import { branchRoutes } from './pages/feature-branch/branch.routes';
 import { ShellComponent } from './shell/shell.component';
 import { DashboardComponent } from './pages/dashboards/dashboards.component';
 import { FeatureRolefeatureComponent } from './pages/feature-rolefeature/feature-rolefeature.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'landing-page', component: LandingPageComponent},
   {
     path: 'forgot-password',
     loadComponent: () => import('../app/pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
