@@ -27,7 +27,7 @@
             <td>{{ customer.nik }}</td>
             <td>{{ customer.pekerjaan }}</td>
             <td>
-                <button *ngIf="hasFeature('GET_CUSTOMER_BY_ID')" class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
+                <button *ngIf="hasFeature('DETAIL_CUSTOMER')" class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
               </td>
           </tr>
           <tr *ngIf="filteredCustomers.length === 0">

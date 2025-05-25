@@ -114,11 +114,11 @@ export class FeatureRolefeatureComponent {
         { key: 'BRANCH', keyword: 'BRANCH' },
         { key: 'CUSTOMER', keyword: 'CUSTOMER' },
         { key: 'EMPLOYEE', keyword: 'EMPLOYEE' },
-        { key: 'FEATURES', keyword: 'ROLES_FEATURES' },
-        { key: 'HISTORY', keyword: 'HISTORY' },
+        { key: 'ROLES_FEATURES', keyword: 'ROLES_FEATURES' },
         { key: 'PENGAJUAN', keyword: 'PENGAJUAN' },
         { key: 'PLAFON', keyword: 'PLAFON' },
         { key: 'ROLES', keyword: 'ROLES' },
+        { key: 'FEATURES', keyword: 'FEATURES' }
       ];
 
       this.featuresForRoleGrouped = {}; // Reset group
@@ -215,11 +215,11 @@ export class FeatureRolefeatureComponent {
       { key: 'BRANCH', keyword: 'BRANCH' },
       { key: 'CUSTOMER', keyword: 'CUSTOMER' },
       { key: 'EMPLOYEE', keyword: 'EMPLOYEE' },
-      { key: 'FEATURES', keyword: 'ROLES_FEATURES' },
-      { key: 'HISTORY', keyword: 'HISTORY' },
+      { key: 'ROLES_FEATURES', keyword: 'ROLES_FEATURES' },
       { key: 'PENGAJUAN', keyword: 'PENGAJUAN' },
       { key: 'PLAFON', keyword: 'PLAFON' },
       { key: 'ROLES', keyword: 'ROLES' },
+      { key: 'FEATURES', keyword: 'FEATURES' }
     ];
 
     this.groupedFeatures = {};

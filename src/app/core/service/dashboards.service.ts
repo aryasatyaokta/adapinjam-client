@@ -59,13 +59,13 @@ export class DashboardService {
     }
 
     // Pengajuan
-    if (features.includes('REVIEW_HISTORY')) {
+    if (features.includes('GET_REVIEW_PENGAJUAN')) {
       calls.totalPengajuan = this.pengajuanService.getReviewHistory(headers).pipe(map(res => res.length));
     } else {
       calls.totalPengajuan = of(0);
     }
 
-    if (features.includes('REVIEW_HISTORY_BY_ID')) {
+    if (features.includes('GET_REVIEW_PENGAJUAN_HISTORY')) {
       calls.totalRiwayatPengajuan = this.pengajuanService.getMyReviewedPengajuan().pipe(map(res => res.length));
     } else {
       calls.totalRiwayatPengajuan = of(0);
@@ -86,7 +86,7 @@ export class DashboardService {
     }
 
     // Features
-    if (features.includes('GET_ALL_FEATURE')) {
+    if (features.includes('GET_ALL_FEATURES')) {
       calls.totalFeatures = this.featureService.getAllFeatures().pipe(map(res => res.length));
     } else {
       calls.totalFeatures = of(0);

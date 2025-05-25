@@ -8,17 +8,17 @@
       </a>
     </div>
     <div class="list-group">
-      <a *ngIf="hasFeature('REVIEW_HISTORY')" routerLink="/pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+      <a *ngIf="hasFeature('GET_REVIEW_PENGAJUAN')" routerLink="/pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
         <i class="bi bi-file-earmark-text me-2"></i> List Pengajuan
       </a>
     </div>
     <div class="list-group">
-      <a *ngIf="hasFeature('GET_EMPLOYEE_BY_ID')" routerLink="/detail-akun" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+      <a *ngIf="hasFeature('DETAIL_EMPLOYEE')" routerLink="/detail-akun" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
         <i class="bi bi-person-circle me-2"></i> Detail Akun
       </a>
     </div>
     <div class="list-group">
-      <a *ngIf="hasFeature('REVIEW_HISTORY_BY_ID')" routerLink="/history-pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
+      <a *ngIf="hasFeature('GET_REVIEW_PENGAJUAN_HISTORY')" routerLink="/history-pengajuan" routerLinkActive="active-menu" class="list-group-item cursor-pointer">
         <i class="bi bi-clock-history me-2"></i> Riwayat Pengajuan
       </a>
     </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="list-group">
       <a 
-        *ngIf="hasFeature('GET_ALL_ROLES')"
+        *ngIf="hasFeature('GET_ROLES_FEATURES')"
         routerLink="/role" 
         routerLinkActive="active-menu"
         class="list-group-item cursor-pointer">
