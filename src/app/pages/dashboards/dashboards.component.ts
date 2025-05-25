@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     totalCustomers: 0,
     totalEmployees: 0,
     totalPengajuan: 0,
+    totalRiwayatPengajuan: 0,
     totalRoles: 0,
     totalPlafon: 0,
     totalFeatures: 0

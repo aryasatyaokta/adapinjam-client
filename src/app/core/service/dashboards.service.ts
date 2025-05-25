@@ -65,6 +65,12 @@ export class DashboardService {
       calls.totalPengajuan = of(0);
     }
 
+    if (features.includes('REVIEW_HISTORY_BY_ID')) {
+      calls.totalRiwayatPengajuan = this.pengajuanService.getMyReviewedPengajuan().pipe(map(res => res.length));
+    } else {
+      calls.totalRiwayatPengajuan = of(0);
+    }
+
     // Roles
     if (features.includes('GET_ALL_ROLES')) {
       calls.totalRoles = this.roleService.getAllRoles(headers).pipe(map(res => res.length));
