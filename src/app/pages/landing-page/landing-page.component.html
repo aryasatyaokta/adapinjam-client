@@ -41,36 +41,36 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">AdaPinjam</h1>
+        <img src="assets/img/logo.png" alt="">
+        <!-- <h1 class="sitename">AdaPinjam</h1> -->
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">Tentang Kami</a></li>
-          <li><a href="#features">Fitur</a></li>
-          <li><a href="#services">Plafon</a></li>
-          <li><a href="#pricing">Testimoni</a></li>
-           <li><a href="#pricing">FAQ</a></li>
-          <li><a href="#contact">Kontak</a></li>
+          <li><a href="#" (click)="scrollToSection('hero', $event)" [class.active]="activeSection === 'hero'">Home</a></li>
+           <li><a href="#" (click)="scrollToSection('about', $event)" [class.active]="activeSection === 'about'">Tentang Kami</a></li>
+          <li><a href="#" (click)="scrollToSection('features', $event)" [class.active]="activeSection === 'features'">Fitur</a></li>
+          <li><a href="#" (click)="scrollToSection('plafon', $event)" [class.active]="activeSection === 'plafon'">Plafon</a></li>
+          <li><a href="#" (click)="scrollToSection('testimonials', $event)" [class.active]="activeSection === 'testimonial'">Testimoni</a></li>
+          <li><a href="#" (click)="scrollToSection('faq', $event)" [class.active]="activeSection === 'faq'">FAQ</a></li>
+         <li><a href="#" (click)="scrollToSection('contact', $event)" [class.active]="activeSection === 'contact'">Kontak</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted d-inline-flex align-items-center gap-2" href="index.html#about">
+      <a (click)="onSubmit($event)" class="btn-getstarted d-inline-flex align-items-center gap-2" href="index.html#about">
         <i class="bi bi-google-play"></i>
         <span>Download</span>
       </a>
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" style="padding-top: 70px;">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="hero" class="hero section" style="padding-top: 0;">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -93,12 +93,12 @@
                 </p>
 
                 <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1 d-inline-flex align-items-center gap-2">
+                <a (click)="onSubmit($event)"  class="btn btn-primary me-0 me-sm-2 mx-1 d-inline-flex align-items-center gap-2">
                   <i class="bi bi-google-play"></i>
                   <span>Download Sekarang</span>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link mt-2 mt-sm-0 glightbox">
+                <a (click)="onSubmit($event)"  class="btn btn-link mt-2 mt-sm-0 glightbox">
                     <i class="bi bi-play-circle me-1"></i>
                     Lihat Youtube
                 </a>
@@ -108,24 +108,24 @@
 
           <div class="col-lg-6">
             <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
+             <img src="assets/img/homebg.png" alt="Hero Image" class="img-fluid fade-in-img" style="width: 80%;">
 
               <div class="customers-badge">
                 <div class="customer-avatars">
-                  <img src="assets/img/avatar-1.webp" alt="Customer 1" class="avatar">
-                  <img src="assets/img/avatar-2.webp" alt="Customer 2" class="avatar">
-                  <img src="assets/img/avatar-3.webp" alt="Customer 3" class="avatar">
-                  <img src="assets/img/avatar-4.webp" alt="Customer 4" class="avatar">
-                  <img src="assets/img/avatar-5.webp" alt="Customer 5" class="avatar">
-                  <span class="avatar more">12+</span>
+                  <img src="assets/img/teo.jpg" alt="Customer 1" class="avatar">
+                  <img src="assets/img/rizal.jpg" alt="Customer 2" class="avatar">
+                  <img src="assets/img/alip.jpg" alt="Customer 3" class="avatar">
+                  <img src="assets/img/aan.jpg" alt="Customer 4" class="avatar">
+                  <img src="assets/img/ray.jpg" alt="Customer 5" class="avatar">
+                  <span class="avatar more">6rb+</span>
                 </div>
-                <p class="mb-0 mt-2">12,000+ lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+                <p class="mb-0 mt-0">6500+ pengguna yang sudah mengunakan aplikasi</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="row stats-row gy-4 mt-5" data-aos="fade-up" data-aos-delay="500">
+        <div class="row stats-row gy-4 mt-0" data-aos="fade-up" data-aos-delay="500">
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                 <div class="stat-icon">
@@ -184,7 +184,7 @@
 
             <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
                 <span class="about-meta">TENTANG KAMI</span>
-                <h2 class="about-title">Solusi Pinjaman Cepat, Aman, dan Terpercaya</h2>
+                <h2 class="about-title">Solusi Pinjaman Terpercaya Anda</h2>
                 <p class="about-description">
                 AdaPinjam hadir untuk membantu kebutuhan finansial Anda dengan proses yang mudah, transparan, dan cepat.
                 Kami berkomitmen memberikan layanan terbaik bagi seluruh masyarakat Indonesia.
@@ -234,8 +234,8 @@
             <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="image-wrapper">
                 <div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
-                    <img src="assets/img/about-5.webp" alt="Layanan AdaPinjam" class="img-fluid main-image rounded-4">
-                    <img src="assets/img/about-2.webp" alt="Tim AdaPinjam" class="img-fluid small-image rounded-4">
+                    <img src="assets/img/about2.png" alt="Layanan AdaPinjam" class="img-fluid main-image rounded-4 fade-in-img">
+                    <img src="assets/img/about1.png" alt="Tim AdaPinjam" class="img-fluid small-image rounded-4 fade-in-img">
                 </div>
                 <div class="experience-badge floating">
                     <h3>6+ <span>Tahun</span></h3>
@@ -271,15 +271,18 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card text-center h-100 p-4 border-0 shadow-sm">
+           <div class="col-lg-4 col-md-6">
+              <div class="card text-center h-100 p-4 border-0 shadow-sm">
                 <div class="mb-3">
-                    <i class="bi bi-cloud-upload-fill display-4 text-primary"></i>
+                  <i class="bi bi-file-earmark-check-fill display-4 text-primary"></i>
                 </div>
-                <h5 class="card-title">Akses Cloud</h5>
-                <p class="card-text">Simpan dan akses data kapan saja melalui layanan cloud kami.</p>
-                </div>
+                <h5 class="card-title">Pengajuan Mudah</h5>
+                <p class="card-text">
+                  Ajukan pinjaman secara online hanya dalam beberapa langkah tanpa perlu datang langsung ke kantor cabang.
+                </p>
+              </div>
             </div>
+
 
             <!-- Card 3 -->
             <div class="col-lg-4 col-md-6">
@@ -329,221 +332,127 @@
         </div>
      </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section light-background">
-
+    <!-- Plafon Section -->
+    <section id="plafon" class="pricing section light-background">
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Plafon</h2>
+        <p><p>Plafon menentukan batas pinjaman Anda. Raih plafon lebih tinggi dengan histori pinjaman yang sehat</p>
       </div><!-- End Section Title -->
+      <div class="container position-relative" data-aos="fade-up">
+        <div class="position-relative">
+          <!-- Left Button -->
+          <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y z-3"
+                  style="opacity: 0.7;"
+                  (click)="prev()"
+                  [disabled]="currentIndex === 0">
+            <i class="bi bi-chevron-left fs-3"></i>
+          </button>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <!-- Right Button -->
+          <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y z-3"
+                  style="opacity: 0.7;"
+                  (click)="next()"
+                  [disabled]="currentIndex + itemsPerPage >= plafons.length">
+            <i class="bi bi-chevron-right fs-3"></i>
+          </button>
 
-        <div class="row g-4 justify-content-center">
-
-          <!-- Basic Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="pricing-card">
-              <h3>Basic Plan</h3>
-              <div class="price">
-                <span class="currency">$</span>
-                <span class="amount">9.9</span>
-                <span class="period">/ month</span>
+          <!-- Plafon Cards -->
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-6" *ngFor="let plafon of visiblePlafons; let i = index">
+              <div class="card text-white position-relative shadow-sm h-100">
+                <img [src]="imageUrls[currentIndex + i]" class="card-img fade-in-img" alt="Plafon"
+                    style="height: 300px; object-fit: cover;">
+                <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center bg-opacity-50">
+                  <h5 class="card-title">{{ plafon.jenisPlafon }}</h5>
+                  <p class="card-text">Limit hingga Rp{{ plafon.jumlahPlafon | number }}</p>
+                </div>
               </div>
-              <p class="description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam.</p>
-
-              <h4>Featured Included:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Duis aute irure dolor
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Excepteur sint occaecat
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Nemo enim ipsam voluptatem
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-primary">
-                Buy Now
-                <i class="bi bi-arrow-right"></i>
-              </a>
             </div>
           </div>
-
-          <!-- Standard Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="pricing-card popular">
-              <div class="popular-badge">Most Popular</div>
-              <h3>Standard Plan</h3>
-              <div class="price">
-                <span class="currency">$</span>
-                <span class="amount">19.9</span>
-                <span class="period">/ month</span>
-              </div>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-
-              <h4>Featured Included:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Lorem ipsum dolor sit amet
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Consectetur adipiscing elit
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Sed do eiusmod tempor
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Ut labore et dolore magna
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-light">
-                Buy Now
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Premium Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="pricing-card">
-              <h3>Premium Plan</h3>
-              <div class="price">
-                <span class="currency">$</span>
-                <span class="amount">39.9</span>
-                <span class="period">/ month</span>
-              </div>
-              <p class="description">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.</p>
-
-              <h4>Featured Included:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Temporibus autem quibusdam
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Saepe eveniet ut et voluptates
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Nam libero tempore soluta
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Cumque nihil impedit quo
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Maxime placeat facere possimus
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-primary">
-                Buy Now
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
         </div>
-
-      </div>
-
+    </div>
     </section><!-- /Pricing Section -->
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section light-background">
 
-  <!-- Judul Section -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Testimoni</h2>
-    <p>Pengalaman nyata dari pengguna setia AdaPinjam dalam memenuhi kebutuhan finansial mereka.</p>
-  </div><!-- End Section Title -->
+        <!-- Judul Section -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Testimoni</h2>
+          <p>Pengalaman nyata dari pengguna setia AdaPinjam dalam memenuhi kebutuhan finansial mereka.</p>
+        </div><!-- End Section Title -->
 
-  <div class="container">
-    <div class="row g-5">
+        <div class="container">
+          <div class="row g-5">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="testimonial-item">
+                <img src="assets/img/aan.jpg" class="testimonial-img" alt="">
+                <h3>Rizaldi Julius</h3>
+                <h4>Pengusaha Minyak Wangi</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left text-primary"></i>
+                  <span>Proses pengajuan di AdaPinjam sangat cepat dan mudah. Timnya responsif dan transparan dalam setiap langkahnya.</span>
+                  <i class="bi bi-quote quote-icon-right text-primary"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
 
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="testimonial-item">
-          <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-          <h3>Rizaldi Julius</h3>
-          <h4>Pengusaha Minyak Wangi</h4>
-          <div class="stars">
-            <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="testimonial-item">
+                <img src="assets/img/rizal.jpg" class="testimonial-img" alt="">
+                <h3>Liezarda Nugrahanindito</h3>
+                <h4>Pejabat Pembuat Akta Tanah</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left text-primary"></i>
+                  <span>AdaPinjam membantu saya ketika butuh dana mendadak. Bunganya ringan dan bisa diproses dari rumah!</span>
+                  <i class="bi bi-quote quote-icon-right text-primary"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="testimonial-item">
+                <img src="assets/img/teo.jpg" class="testimonial-img" alt="">
+                <h3>Farhan Fawzy</h3>
+                <h4>Pekerja Laut Lepas</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left text-primary"></i>
+                  <span>Saya gunakan AdaPinjam untuk menambah modal usaha. Pengajuannya mudah dan bisa langsung cair ke rekening.</span>
+                  <i class="bi bi-quote quote-icon-right text-primary"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="testimonial-item">
+                <img src="assets/img/ray.jpg" class="testimonial-img" alt="">
+                <h3>Theo Pradhana</h3>
+                <h4>Pengusaha Lele</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left text-primary"></i>
+                  <span>Fitur dan tampilan aplikasinya sangat membantu. Saya merasa aman dan nyaman menggunakan AdaPinjam.</span>
+                  <i class="bi bi-quote quote-icon-right text-primary"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
           </div>
-          <p>
-            <i class="bi bi-quote quote-icon-left text-primary"></i>
-            <span>Proses pengajuan di AdaPinjam sangat cepat dan mudah. Timnya responsif dan transparan dalam setiap langkahnya.</span>
-            <i class="bi bi-quote quote-icon-right text-primary"></i>
-          </p>
         </div>
-      </div><!-- End testimonial item -->
 
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="testimonial-item">
-          <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-          <h3>Liezarda Nugrahanindito</h3>
-          <h4>Pejabat Pembuat Akta Tanah</h4>
-          <div class="stars">
-            <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
-          </div>
-          <p>
-            <i class="bi bi-quote quote-icon-left text-primary"></i>
-            <span>AdaPinjam membantu saya ketika butuh dana mendadak. Bunganya ringan dan bisa diproses dari rumah!</span>
-            <i class="bi bi-quote quote-icon-right text-primary"></i>
-          </p>
-        </div>
-      </div><!-- End testimonial item -->
-
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-        <div class="testimonial-item">
-          <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-          <h3>Farhan Fawzy</h3>
-          <h4>Pekerja Laut Lepas</h4>
-          <div class="stars">
-            <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
-          </div>
-          <p>
-            <i class="bi bi-quote quote-icon-left text-primary"></i>
-            <span>Saya gunakan AdaPinjam untuk menambah modal usaha. Pengajuannya mudah dan bisa langsung cair ke rekening.</span>
-            <i class="bi bi-quote quote-icon-right text-primary"></i>
-          </p>
-        </div>
-      </div><!-- End testimonial item -->
-
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-        <div class="testimonial-item">
-          <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-          <h3>Teho Pradhana</h3>
-          <h4>Pengusaha Lele</h4>
-          <div class="stars">
-            <i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i><i class="bi bi-star-fill text-primary"></i>
-          </div>
-          <p>
-            <i class="bi bi-quote quote-icon-left text-primary"></i>
-            <span>Fitur dan tampilan aplikasinya sangat membantu. Saya merasa aman dan nyaman menggunakan AdaPinjam.</span>
-            <i class="bi bi-quote quote-icon-right text-primary"></i>
-          </p>
-        </div>
-      </div><!-- End testimonial item -->
-
-    </div>
-  </div>
-
-</section>
-
+    </section>
 
     <!-- Faq Section -->
     <section class="faq-9 faq section light-background" id="faq">
@@ -562,7 +471,6 @@
 
             <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
                 <div class="faq-container">
-
                 <div class="faq-item" [class.faq-active]="isFaqOpen" (click)="toggleFaq()">
                     <h3>Bagaimana cara mengajukan pinjaman di AdaPinjam?</h3>
                     <div class="faq-content" *ngIf="isFaqOpen">
@@ -575,41 +483,41 @@
                     <i class="faq-toggle " [ngClass]="isFaqOpen ? 'bi-chevron-right' : 'bi-chevron-right'"></i>
                 </div>
 
-                <div class="faq-item faq-active">
+                <div class="faq-item faq-active" [class.faq-active]="isFaqOpen1" (click)="toggleFaq1()">
                     <h3>Berapa lama proses persetujuan pinjaman?</h3>
-                    <div class="faq-content">
+                    <div class="faq-content" *ngIf="isFaqOpen1">
                     <p>Proses persetujuan biasanya memakan waktu 1–3 hari kerja tergantung kelengkapan dokumen dan hasil verifikasi pegawai dari AdaPinjam.</p>
                     </div>
                     <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
 
-                <div class="faq-item">
+                <div class="faq-item" [class.faq-active]="isFaqOpen2" (click)="toggleFaq2()">
                     <h3>Apakah saya bisa mengajukan pinjaman lebih dari satu kali?</h3>
-                    <div class="faq-content">
+                    <div class="faq-content" *ngIf="isFaqOpen2">
                     <p>Bisa, namun Anda harus menunggu pengajuan sebelumnya selesai di review. Riwayat pinjaman Anda akan memengaruhi plafon Anda di masa depan.</p>
                     </div>
                     <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
 
-                <div class="faq-item">
+                <div class="faq-item" [class.faq-active]="isFaqOpen3" (click)="toggleFaq3()">
                     <h3>Bagaimana sistem bunga dan cicilan di AdaPinjam?</h3>
-                    <div class="faq-content">
+                    <div class="faq-content" *ngIf="isFaqOpen3">
                     <p>Sistem bunga di AdaPinjam bersifat mengikuti plafon dan dihitung berdasarkan jumlah pinjaman serta tenor yang dipilih. Preview cicilan akan ditampilkan sebelum pengajuan dikonfirmasi.</p>
                     </div>
                     <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
 
-                <div class="faq-item">
+                <div class="faq-item" [class.faq-active]="isFaqOpen4" (click)="toggleFaq4()">
                     <h3>Apa itu sistem plafon dan bagaimana cara meningkatkannya?</h3>
-                    <div class="faq-content">
+                    <div class="faq-content" *ngIf="isFaqOpen4">
                     <p>Sistem plafon menentukan batas maksimal pinjaman. Anda bisa naik tier (misal dari Silver ke Gold) jika total pinjaman Anda yang sudah lunas melebihi batas plafon tier berikutnya.</p>
                     </div>
                     <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
 
-                <div class="faq-item">
+                <div class="faq-item" [class.faq-active]="isFaqOpen5" (click)="toggleFaq5()">
                     <h3>Apakah data pribadi saya aman di AdaPinjam?</h3>
-                    <div class="faq-content">
+                    <div class="faq-content" *ngIf="isFaqOpen5">
                     <p>AdaPinjam menggunakan sistem keamanan berlapis untuk melindungi data pengguna dan tidak membagikan informasi pribadi Anda ke pihak ketiga tanpa persetujuan.</p>
                     </div>
                     <i class="faq-toggle bi bi-chevron-right"></i>
@@ -621,7 +529,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Contact Section -->
     <section id="contact" class="contact section light-background">
@@ -678,7 +585,7 @@
                 <h3>Hubungi Kami Langsung</h3>
                 <p>Kami akan merespon pesan Anda secepat mungkin. Silakan isi formulir berikut:</p>
 
-                <form action="/api/kontak" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                <form (submit)="onSubmit($event)" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
                     <div class="row gy-4">
                     <div class="col-md-6">
                         <input type="text" name="name" class="form-control" placeholder="Nama Anda" required>
@@ -701,7 +608,7 @@
                         <div class="error-message"></div>
                         <div class="sent-message">Pesan Anda telah terkirim. Terima kasih telah menghubungi AdaPinjam!</div>
 
-                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                        <button type="submit" (click)="onSubmit($event)" class="btn btn-primary">Kirim Pesan</button>
                     </div>
                     </div>
                 </form>
@@ -711,7 +618,6 @@
             </div>
         </div>
     </section>
-
 
   </main>
 
@@ -731,54 +637,55 @@
           <p><strong>Email:</strong> <span>support&#64;adapinjam.id</span></p>
         </div>
         <div class="social-links d-flex mt-4">
-          <a href="#"><i class="bi bi-twitter"></i></a>
-          <a href="#"><i class="bi bi-facebook"></i></a>
-          <a href="#"><i class="bi bi-instagram"></i></a>
-          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.facebook.com/"><i class="bi bi-twitter"></i></a>
+          <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
         <h4>Menu</h4>
         <ul>
-          <li><a href="#">Beranda</a></li>
-          <li><a href="#">Tentang Kami</a></li>
-          <li><a href="#">Ajukan Pinjaman</a></li>
-          <li><a href="#">Syarat & Ketentuan</a></li>
-          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#" (click)="scrollToSection('hero', $event)" [class.active]="activeSection === 'hero'">Home</a></li>
+           <li><a href="#" (click)="scrollToSection('about', $event)" [class.active]="activeSection === 'about'">Tentang Kami</a></li>
+          <li><a href="#" (click)="scrollToSection('features', $event)" [class.active]="activeSection === 'features'">Fitur</a></li>
+          <li><a href="#" (click)="scrollToSection('plafon', $event)" [class.active]="activeSection === 'plafon'">Plafon</a></li>
+          <li><a href="#" (click)="scrollToSection('testimonials', $event)" [class.active]="activeSection === 'testimonial'">Testimoni</a></li>
+         <li><a href="#" (click)="scrollToSection('contact', $event)" [class.active]="activeSection === 'contact'">Kontak</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
         <h4>Layanan</h4>
         <ul>
-          <li><a href="#">Simulasi Angsuran</a></li>
-          <li><a href="#">Pengajuan Pinjaman</a></li>
-          <li><a href="#">Upgrade Plafon</a></li>
-          <li><a href="#">Cek Status Pengajuan</a></li>
-          <li><a href="#">Cek Status Pinjaman</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Simulasi Angsuran</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Pengajuan Pinjaman</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Upgrade Plafon</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Cek Status Pengajuan</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Cek Status Pinjaman</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
         <h4>Informasi</h4>
         <ul>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Hubungi Kami</a></li>
-          <li><a href="#">Kemitraan</a></li>
-          <li><a href="#">Karier</a></li>
-          <li><a href="#">Berita</a></li>
+          <li><a href="#" (click)="scrollToSection('faq', $event)" [class.active]="activeSection === 'faq'">FAQ</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Hubungi Kami</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Kemitraan</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Karier</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Berita</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
         <h4>Legal</h4>
         <ul>
-          <li><a href="#">Kebijakan Layanan</a></li>
-          <li><a href="#">Keamanan Data</a></li>
-          <li><a href="#">Hak Cipta</a></li>
-          <li><a href="#">Penipuan</a></li>
-          <li><a href="#">Kontak Hukum</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Kebijakan Layanan</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Keamanan Data</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Hak Cipta</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Penipuan</a></li>
+          <li><a href="#" (click)="onSubmit($event)">Kontak Hukum</a></li>
         </ul>
       </div>
 
@@ -788,7 +695,7 @@
   <div class="container copyright text-center mt-4">
     <p>© <span>Hak Cipta</span> <strong class="px-1 sitename">AdaPinjam</strong> <span>Semua Hak Dilindungi</span></p>
     <div class="credits">
-      Dikembangkan oleh <a href="#">Tim IT AdaPinjam</a>
+      Dikembangkan oleh <a href="https://www.linkedin.com/in/aryasatyaokta/">Tim IT AdaPinjam</a>
     </div>
   </div>
 
