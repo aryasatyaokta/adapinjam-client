@@ -53,7 +53,7 @@ export class LandingPageComponent {
   constructor(private plafonService: PlafonService) {}
 
   ngOnInit(): void {
-    this.plafonService.getAllPlafons().subscribe((data) => {
+    this.plafonService.getPlafons().subscribe((data) => {
       this.plafons = data;
       this.updateVisiblePlafons();
     });
@@ -97,9 +97,8 @@ export class LandingPageComponent {
   }
 }
 
-setActive(sectionId: string) {
-  this.activeSection = sectionId;
-}
-
+  setActive(sectionId: string) {
+    this.activeSection = sectionId;
+  }
 
 }

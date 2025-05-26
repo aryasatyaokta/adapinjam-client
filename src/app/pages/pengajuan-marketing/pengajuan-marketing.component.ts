@@ -121,8 +121,6 @@ export class PengajuanMarketingComponent implements OnInit {
     });
   }
   
-  
-  
   private onReviewSuccess(): void {
     Swal.fire({
       title: 'Review Berhasil Dikirim',
@@ -143,4 +141,10 @@ export class PengajuanMarketingComponent implements OnInit {
     modal.hide();
   }  
   
+  toggleZoom(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    target.classList.toggle('zoomed');
+  }
+
+
 }

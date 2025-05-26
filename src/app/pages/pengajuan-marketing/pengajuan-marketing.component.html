@@ -63,12 +63,14 @@
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
+      
       <div class="modal-header bg-dark text-white">
         <h5 class="modal-title" id="detailModalLabel">Review Pengajuan</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
+      
       <div class="modal-body" *ngIf="selectedItem">
-        
+
         <!-- Card: Data Pengajuan -->
         <div class="card mb-4 shadow-sm border-0">
           <div class="card-header bg-primary text-white fw-semibold">
@@ -86,26 +88,47 @@
           </div>
         </div>
 
+        <!-- Card: Dokumen Customer -->
+        <div class="card mb-4 shadow-sm border-0">
+          <div class="card-header bg-info text-white fw-semibold">
+            Dokumen Customer
+          </div>
+          <div class="card-body">
+            <div class="row g-3 justify-content-center">
+              <div class="col-md-6 text-center">
+                <strong>Foto KTP</strong><br>
+                <img [src]="selectedItem.customer?.fotoKtp"
+                  class="img-thumbnail shadow-sm mt-2 zoomable"
+                  *ngIf="selectedItem.customer?.fotoKtp"
+                  style="max-width: 250px;"
+                  alt="Foto KTP"
+                  (click)="toggleZoom($event)">
+
+              </div>
+              <div class="col-md-6 text-center">
+                <strong>Foto Selfie dengan KTP</strong><br>
+               <img [src]="selectedItem.customer?.fotoSelfie"
+                  class="img-thumbnail shadow-sm mt-2 zoomable"
+                  *ngIf="selectedItem.customer?.fotoSelfie"
+                  style="max-width: 250px;"
+                  alt="Foto Selfie dengN kTP"
+                  (click)="toggleZoom($event)">
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Card: Data Customer -->
-        <div class="card shadow-sm border-0">
+        <div class="card mb-4 shadow-sm border-0">
           <div class="card-header bg-success text-white fw-semibold">
             Data Customer
           </div>
           <div class="card-body">
             <div class="row g-3">
-               <div class="col-md-6">
-                <strong>Foto KTP:</strong><br>
-                 <img [src]="selectedItem.customer?.fotoKtp" alt="Foto KTP" class="img-fluid" 
-                   *ngIf="selectedItem.customer?.fotoKtp" style="max-width: 200px; height: auto;">
-               </div>
-              <div class="col-md-6">
-                <strong>Foto Selfie dengan KTP:</strong><br>
-                <img [src]="selectedItem.customer?.fotoSelfie" alt="Foto KTP" class="img-fluid" *ngIf="selectedItem.customer?.fotoSelfie">
-              </div>
               <div class="col-md-6"><strong>Nama:</strong> {{ selectedItem.customer?.nama }}</div>
               <div class="col-md-6"><strong>NIK:</strong> {{ selectedItem.customer?.nik }}</div>
               <div class="col-md-6"><strong>Tempat Lahir:</strong> {{ selectedItem.customer?.tempatLahir }}</div>
-               <div class="col-md-6"><strong>Tanggal Lahir:</strong> {{ selectedItem.customer?.tanggalLahir }}</div>
+              <div class="col-md-6"><strong>Tanggal Lahir:</strong> {{ selectedItem.customer?.tanggalLahir }}</div>
               <div class="col-md-6"><strong>No Telp:</strong> {{ selectedItem.customer?.noTelp }}</div>
               <div class="col-md-12"><strong>Alamat:</strong> {{ selectedItem.customer?.alamat }}</div>
               <div class="col-md-6"><strong>Nama Ibu Kandung:</strong> {{ selectedItem.customer?.namaIbuKandung }}</div>
@@ -117,33 +140,40 @@
             </div>
           </div>
         </div>
-              <!-- Card: Riwayat Review -->
-      <div class="card mt-4 shadow-sm border-0">
-        <div class="card-header bg-warning text-dark fw-semibold">
-          Riwayat Review
-        </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-md-12" *ngFor="let review of selectedItem?.reviewNotes">
-              <strong>{{ review.role }}:</strong>
-              <p class="mb-1 text-muted fst-italic">
-                {{ review.catatan || 'Belum ada catatan' }}
-              </p>
+
+        <!-- Card: Riwayat Review -->
+        <div class="card mb-4 shadow-sm border-0">
+          <div class="card-header bg-warning text-dark fw-semibold">
+            Riwayat Review
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-12" *ngFor="let review of selectedItem?.reviewNotes">
+                <strong>{{ review.role }}:</strong>
+                <p class="mb-1 text-muted fst-italic">
+                  {{ review.catatan || 'Belum ada catatan' }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
-      </div>
-      <div class="modal-body">
+
+      <!-- Catatan Review dan Tombol -->
+      <div class="modal-body border-top">
         <div class="mb-3">
           <label for="catatan" class="form-label">Catatan</label>
-          <textarea id="catatan" class="form-control" [(ngModel)]="reviewCatatan" rows="4" placeholder="Masukkan catatan review..."></textarea>
+          <textarea id="catatan" class="form-control" [(ngModel)]="reviewCatatan" rows="4"
+                    placeholder="Masukkan catatan review..."></textarea>
         </div>
         <div class="d-flex justify-content-end">
           <button class="btn btn-outline-danger me-2" (click)="submitReview(false)">Tolak</button>
           <button class="btn btn-outline-success" (click)="submitReview(true)">Setujui</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+

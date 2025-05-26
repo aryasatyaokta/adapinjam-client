@@ -44,3 +44,22 @@
   .modal-content {
     border-radius: 8px;
   }
+
+  .img-thumbnail:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+  }
+
+  .zoomable {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.zoomable.zoomed {
+  transform: scale(2.5);
+  z-index: 1050;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
