@@ -1,6 +1,7 @@
 // core/components/pengajuan-marketing.component.ts
 import { Component, OnInit } from '@angular/core';
 import { PengajuanMarketingService } from '../../core/service/pengajuan-marketing.service';
+import { AuthService } from '../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -21,12 +22,24 @@ export class PengajuanMarketingComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
+  features: string[] = [];
+
   constructor(
     private pengajuanService: PengajuanMarketingService,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.loadReviewData();
+    const features = this.auth.getFeature(); // ✅ Ambil fitur dari auth
+    if (features) {
+      this.features = JSON.parse(features);
+    }
+  }
+
+  hasFeature(feature: string): boolean {
+    const features = JSON.parse(localStorage.getItem('features') || '[]');
+    return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
   }
 
   paginatedData(): any[] {

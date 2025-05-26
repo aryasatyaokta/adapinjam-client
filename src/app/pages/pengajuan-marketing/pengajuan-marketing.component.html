@@ -9,7 +9,7 @@
           <th style="background-color: #0d6efd; color: white;" scope="col"><i class="bi bi-clock me-1"></i>Tenor</th>
           <th style="background-color: #0d6efd; color: white;" scope="col"><i class="bi bi-graph-up-arrow me-1"></i>Bunga</th>
           <th style="background-color: #0d6efd; color: white;" scope="col"><i class="bi bi-calculator me-1"></i>Angsuran</th>
-          <th style="background-color: #0d6efd; color: white;" scope="col"><i class="bi bi-gear me-1"></i>Aksi</th>
+          <th *ngIf="hasFeature('REVIEW_PENGAJUAN')" style="background-color: #0d6efd; color: white;" scope="col"><i class="bi bi-gear me-1"></i>Aksi</th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -18,7 +18,7 @@
           <td>{{ item.tenor }} bulan</td>
           <td>{{ item.bunga }}%</td>
           <td>{{ item.angsuran | currency: 'IDR' }}</td>
-          <td>
+          <td *ngIf="hasFeature('REVIEW_PENGAJUAN')">
             <!-- <button class="btn btn-sm btn-warning me-1" (click)="openDetailModal(item)" data-bs-toggle="modal" data-bs-target="#detailModal">
               Lihat Detail
             </button> -->

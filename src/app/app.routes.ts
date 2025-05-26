@@ -42,7 +42,7 @@ export const routes: Routes = [
     loadComponent: () => import('../app/pages/reset-password-cust/reset-password-cust.component').then(m => m.ResetPasswordCustComponent)
   },        
   {
-    path: '', component: ShellComponent, children: [
+    path: '', component: ShellComponent,  canActivateChild: [authGuard], children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'pengajuan', component: PengajuanMarketingComponent },
       { path: 'detail-akun', component: AkunMarketingComponent},

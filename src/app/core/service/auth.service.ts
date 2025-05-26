@@ -23,6 +23,7 @@ export class AuthService {
     })
   );
 }
+  
   logout() {
     const token = this.getToken();
     if (token) {
@@ -30,21 +31,20 @@ export class AuthService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        responseType: 'text'  // Tambahkan ini
+        responseType: 'text'
       }).subscribe({
         next: () => {
           this.clearSession();
-          this.router.navigate(['/login']);
+          window.location.href = '/login'; // RELOAD halaman login
         },
-        error: (err) => {
-          console.error('Logout failed', err);
+        error: () => {
           this.clearSession();
-          this.router.navigate(['/login']);
-        },
-      });      
+          window.location.href = '/login';
+        }
+      });
     } else {
       this.clearSession();
-      this.router.navigate(['/login']);
+      window.location.href = '/login';
     }
   }
 

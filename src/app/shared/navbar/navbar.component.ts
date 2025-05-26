@@ -3,6 +3,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { PengajuanMarketingService } from '../../core/service/pengajuan-marketing.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 declare var bootstrap: any;
 @Component({
   selector: 'app-navbar',
@@ -54,6 +55,17 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    this.auth.logout();
-  }
+  Swal.fire({
+    title: 'Konfirmasi Logout',
+    text: 'Apakah Anda yakin ingin keluar dari aplikasi?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Ya, Keluar',
+    cancelButtonText: 'Batal'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.auth.logout();
+    }
+  });
+}
 }

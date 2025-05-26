@@ -21,7 +21,7 @@
           <th style="background-color: #0d6efd; color: white;">Role</th>
           <th style="background-color: #0d6efd; color: white;">Cabang</th>
           <th style="background-color: #0d6efd; color: white;">Status</th>
-          <th style="background-color: #0d6efd; color: white;">Aksi</th>
+          <th *ngIf="hasFeature('UPDATE_EMPLOYEE')" style="background-color: #0d6efd; color: white;">Aksi</th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -32,8 +32,8 @@
           <td>{{ employee.user?.role?.nameRole }}</td>
           <td>{{ employee.branch?.branch }}</td>
           <td>{{ employee.statusEmployee }}</td>
-          <td>
-            <button *ngIf="hasFeature('UPDATE_EMPLOYEE')" (click)="editEmployee(employee)" class="btn btn-sm btn-outline-primary  me-1">
+          <td *ngIf="hasFeature('UPDATE_EMPLOYEE')">
+            <button (click)="editEmployee(employee)" class="btn btn-sm btn-outline-primary  me-1">
               <i class="bi bi-pencil"></i> Edit
             </button>
           </td>

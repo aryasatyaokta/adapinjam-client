@@ -16,7 +16,7 @@
           <input type="number" class="form-control" placeholder="Bunga" formControlName="bunga">
         </div>
         <div class="col-md-3">
-          <button class="btn btn-outline-primary" type="submit">{{ isEditing ? 'Update' : 'Tambah' }}</button>
+          <button *ngIf="hasFeature('UPDATE_PLAFON') || hasFeature('CREATE_PLAFON')" class="btn btn-outline-primary" type="submit">{{ isEditing ? 'Update' : 'Tambah' }}</button>
         </div>
       </div>
     </form>

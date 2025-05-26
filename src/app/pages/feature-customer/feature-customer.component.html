@@ -16,7 +16,7 @@
             <th style="background-color: #0d6efd; color: white;">Role</th>
             <th style="background-color: #0d6efd; color: white;">NIK</th>
             <th style="background-color: #0d6efd; color: white;">Pekerjaan</th>
-            <th style="background-color: #0d6efd; color: white;">Aksi</th>
+            <th *ngIf="hasFeature('DETAIL_CUSTOMER')" style="background-color: #0d6efd; color: white;">Aksi</th>
           </tr>
         </thead>
         <tbody class="text-center">
@@ -26,8 +26,8 @@
             <td>{{ customer.user?.role?.nameRole }}</td>
             <td>{{ customer.nik }}</td>
             <td>{{ customer.pekerjaan }}</td>
-            <td>
-                <button *ngIf="hasFeature('DETAIL_CUSTOMER')" class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
+            <td *ngIf="hasFeature('DETAIL_CUSTOMER')">
+                <button class="btn btn-sm btn-primary" (click)="openDetailModal(customer.id)">Detail</button>
               </td>
           </tr>
           <tr *ngIf="filteredCustomers.length === 0">
