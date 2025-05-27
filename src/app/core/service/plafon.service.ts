@@ -46,4 +46,14 @@ export class PlafonService {
   deletePlafon(id: number): Observable<Plafon> {
     return this.http.delete<Plafon>(`${this.baseUrl}/delete/${id}`, { headers: this.getAuthHeaders() });
   }  
+
+  getSimulasi(jenisPlafon: string, amount: number, tenor: number): Observable<any> {
+    const params = {
+      jenisPlafon: jenisPlafon,
+      amount: amount.toString(),
+      tenor: tenor.toString()
+    };
+    return this.http.get('http://localhost:8080/be/api/v1/pengajuan/simulasi', { params });
+  }
+
 }
