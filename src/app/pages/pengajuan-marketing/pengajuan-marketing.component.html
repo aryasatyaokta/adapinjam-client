@@ -149,11 +149,14 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-md-12" *ngFor="let review of selectedItem?.reviewNotes">
-                <strong>{{ review.role }}:</strong>
-                <p class="mb-1 text-muted fst-italic">
-                  {{ review.catatan || 'Belum ada catatan' }}
-                </p>
+                <ng-container *ngIf="review.catatan && review.catatan.trim()">
+                  <strong>{{ review.role }}:</strong>
+                  <p class="mb-1 text-muted fst-italic">
+                    {{ review.catatan }}
+                  </p>
+                </ng-container>
               </div>
+
             </div>
           </div>
         </div>
