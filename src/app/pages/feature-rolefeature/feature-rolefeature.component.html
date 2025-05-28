@@ -5,6 +5,17 @@
     <button *ngIf="hasFeature('CREATE_ROLES_FEATURES')" class="btn btn-primary" (click)="addRoleModal()">
       <i class="bi bi-plus-circle me-1"></i> Tambah Role Fitur
     </button>
+    <div class="input-group w-auto" style="max-width: 300px;">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Cari Role..."
+        [(ngModel)]="searchRoleText"
+      />
+      <!-- <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span> -->
+    </div>
   </div>
 
   <div *ngIf="hasFeature('GET_ROLES_FEATURES')" class="table-responsive shadow-sm rounded">
@@ -17,7 +28,7 @@
         </tr>
       </thead>
       <tbody class="text-center">
-        <tr *ngFor="let role of roles">
+        <tr *ngFor="let role of filteredRoles">
           <td>{{ role.nameRole }}</td>
           <td>
             <button *ngIf="hasFeature('GET_ALL_ROLES')" class="btn btn-sm btn-outline-primary" (click)="loadFeaturesForRole(role.id)">

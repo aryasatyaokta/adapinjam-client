@@ -22,6 +22,7 @@ export class FeatureRolefeatureComponent {
   selectedRoleId: number | null = null;
   selectedFeatureIds: number[] = [];
   newRoleName: string = '';
+  searchRoleText: string = '';
 
   groupedFeatures: { [key: string]: any[] } = {};
   featuresForRoleGrouped: { [key: string]: any[] } = {};
@@ -35,6 +36,13 @@ export class FeatureRolefeatureComponent {
   ngOnInit(): void {
     this.loadRoles();
     this.loadAllFeatures();
+  }
+
+  get filteredRoles(): any[] {
+    if (!this.searchRoleText.trim()) return this.roles;
+    return this.roles.filter(role =>
+      role.nameRole.toLowerCase().includes(this.searchRoleText.toLowerCase())
+    );
   }
 
   loadRoles(): void {
