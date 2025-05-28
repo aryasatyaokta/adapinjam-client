@@ -21,6 +21,7 @@ export class PengajuanMarketingComponent implements OnInit {
   isApproved: boolean = true; // Untuk menyimpan data yang akan ditampilkan di modal
   currentPage: number = 1;
   itemsPerPage: number = 5;
+  searchQuery: string = '';
 
   features: string[] = [];
 
@@ -43,12 +44,32 @@ export class PengajuanMarketingComponent implements OnInit {
   }
 
   paginatedData(): any[] {
+    const filtered = this.reviewData.filter(item => {
+      const nama = item.customer?.nama?.toLowerCase() || '';
+      const tanggal = new Date(item.createdAt).toLocaleDateString('id-ID', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      }).toLowerCase();
+
+      const query = this.searchQuery.toLowerCase();
+      return nama.includes(query) || tanggal.includes(query);
+    });
+
     const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.reviewData.slice(start, start + this.itemsPerPage);
+    return filtered.slice(start, start + this.itemsPerPage);
   }
   
   get totalPages(): number {
-    return Math.ceil(this.reviewData.length / this.itemsPerPage) || 1;
+    const filtered = this.reviewData.filter(item => {
+      const nama = item.customer?.nama?.toLowerCase() || '';
+      const tanggal = new Date(item.createdAt).toLocaleDateString('id-ID', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      }).toLowerCase();
+
+      const query = this.searchQuery.toLowerCase();
+      return nama.includes(query) || tanggal.includes(query);
+    });
+
+    return Math.ceil(filtered.length / this.itemsPerPage) || 1;
   }
   
   totalPagesArray(): number[] {
