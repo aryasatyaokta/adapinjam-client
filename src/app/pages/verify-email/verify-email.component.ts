@@ -23,7 +23,7 @@ export class VerifyEmailComponent implements OnInit {
       }
 
       // this.http.get(`http://35.223.1.74/be/api/v1/auth/verify-email?token=${token}`).subscribe({
-      this.http.get(`http://localhost:8080/be/api/v1/auth/verify-email?token=${token}`).subscribe({
+      this.http.get(`http://35.223.1.74/be/api/v1/auth/verify-email?token=${token}`).subscribe({
         next: () => {
           this.status = 'success';
         },

@@ -36,7 +36,20 @@ export class FeatureRolefeatureComponent {
   ngOnInit(): void {
     this.loadRoles();
     this.loadAllFeatures();
+    this.setupModalEventListener();
   }
+
+  setupModalEventListener(): void {
+  if (isPlatformBrowser(this.platformId)) {
+    const modalElement = document.getElementById('addRoleModal');
+    if (modalElement) {
+      modalElement.addEventListener('hidden.bs.modal', () => {
+        this.newRoleName = '';
+        this.selectedFeatureIds = [];
+      });
+    }
+  }
+}
 
   get filteredRoles(): any[] {
     if (!this.searchRoleText.trim()) return this.roles;

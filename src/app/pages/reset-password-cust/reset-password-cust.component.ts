@@ -47,7 +47,7 @@ export class ResetPasswordCustComponent {
       };
 
       // this.http.post('http://35.223.1.74/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
-      this.http.post('http://localhost:8080/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
+      this.http.post('http://35.223.1.74/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
         next: (response) => {
           console.log('Response:', response); // debug
 

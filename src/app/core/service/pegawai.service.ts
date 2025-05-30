@@ -8,7 +8,7 @@ import { AuthService } from './auth.service'; // pastikan path-nya benar
 })
 export class PegawaiService {
   // private apiUrl = 'http://35.223.1.74/be/api/v1/user-employee';
-  private apiUrl = 'http://localhost:8080/be/api/v1/user-employee';
+  private apiUrl = 'http://35.223.1.74/be/api/v1/user-employee';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

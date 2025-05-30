@@ -28,6 +28,7 @@ export class FeatureBranchComponent implements OnInit {
   loadBranches(): void {
     this.branchService.getAllBranches().subscribe({
       next: (data) => {
+        console.log('Branches data:', data);
         this.branches = data;
         this.applySearch();
       },
@@ -68,6 +69,7 @@ export class FeatureBranchComponent implements OnInit {
 
   editBranch(branch: any): void {
     this.branchToEdit = { ...branch };
+    console.log('Edit branch:', this.branchToEdit);
     this.showModal = true;
   }
 
@@ -161,4 +163,5 @@ export class FeatureBranchComponent implements OnInit {
     const features = JSON.parse(localStorage.getItem('features') || '[]');
     return features.includes(feature);  // Periksa jika 'feature' ada dalam array 'features'
   }
+  
 }

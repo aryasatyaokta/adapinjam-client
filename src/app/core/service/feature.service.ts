@@ -14,7 +14,7 @@ export interface Feature {
 })
 export class FeatureService {
   // private baseUrl = 'http://35.223.1.74/be/api/v1/features';
-  private baseUrl = 'http://localhost:8080/be/api/v1/features';
+  private baseUrl = 'http://35.223.1.74/be/api/v1/features';
 
   constructor(
     private http: HttpClient,

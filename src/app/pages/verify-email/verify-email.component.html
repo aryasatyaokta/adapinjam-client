@@ -1,9 +1,27 @@
-<div class="container text-center mt-5">
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="text-center">
     <ng-container [ngSwitch]="status">
-      <p *ngSwitchCase="'loading'">⏳ Memverifikasi email Anda...</p>
-      <p *ngSwitchCase="'success'" class="text-success">✅ Email Anda berhasil diverifikasi! Silakan login.</p>
-      <!-- <p *ngSwitchCase="'success'" class="text-danger">✅ Email Anda berhasil diverifikasi! Silakan login.</p> -->
-      <p *ngSwitchCase="'invalid'" class="text-warning">⚠️ Token tidak ditemukan.</p>
+
+      <!-- Loading -->
+      <div *ngSwitchCase="'loading'">
+        <i class="bi bi-hourglass-split text-primary display-1 mb-3"></i>
+        <h4>⏳ Memverifikasi email Anda...</h4>
+      </div>
+
+      <!-- Success -->
+      <div *ngSwitchCase="'success'">
+        <i class="bi bi-check-circle-fill text-success display-1 mb-3"></i>
+        <h4>Email Anda berhasil diverifikasi!</h4>
+        <p class="text-muted">Silakan login untuk melanjutkan.</p>
+      </div>
+
+      <!-- Invalid Token -->
+      <div *ngSwitchCase="'invalid'">
+        <i class="bi bi-exclamation-triangle-fill text-warning display-1 mb-3"></i>
+        <h4>Token tidak ditemukan.</h4>
+        <p class="text-muted">Silakan cek kembali tautan verifikasi Anda.</p>
+      </div>
+
     </ng-container>
   </div>
-  
+</div>

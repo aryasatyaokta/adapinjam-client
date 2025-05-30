@@ -31,7 +31,7 @@
               </td>
           </tr>
           <tr *ngIf="filteredCustomers.length === 0">
-            <td colspan="5" class="text-center text-muted">Tidak ada data customer</td>
+            <td colspan="6" class="text-center text-muted">Tidak ada data customer</td>
           </tr>
         </tbody>
       </table>
@@ -68,24 +68,41 @@
           <button type="button" class="btn-close" (click)="closeDetailModal()"></button>
         </div>
         <div class="modal-body" *ngIf="selectedCustomer">
-          <p><strong>Nama:</strong> {{ selectedCustomer.user?.name }}</p>
-          <p><strong>Email:</strong> {{ selectedCustomer.user?.email }}</p>
-          <p><strong>Role:</strong> {{ selectedCustomer.user?.role?.nameRole }}</p>
-          <p><strong>NIK:</strong> {{ selectedCustomer.nik }}</p>
-          <p><strong>Tempat Lahir:</strong> {{ selectedCustomer.tempatLahir }}</p>
-          <p><strong>Tanggal Lahir:</strong> {{ selectedCustomer.tanggalLahir }}</p>
-          <p><strong>No Telp:</strong> {{ selectedCustomer.noTelp }}</p>
-          <p><strong>Alamat:</strong> {{ selectedCustomer.alamat }}</p>
-          <p><strong>Ibu Kandung:</strong> {{ selectedCustomer.namaIbuKandung }}</p>
-          <p><strong>Pekerjaan:</strong> {{ selectedCustomer.pekerjaan }}</p>
-          <p><strong>Gaji:</strong> {{ selectedCustomer.gaji }}</p>
-          <p><strong>No Rekening:</strong> {{ selectedCustomer.noRek }}</p>
-          <p><strong>Status Rumah:</strong> {{ selectedCustomer.statusRumah }}</p>
-          <p><strong>Jenis Plafon:</strong> {{ selectedCustomer.plafon?.jenisPlafon }}</p>
-          <p><strong>Jenis Plafon:</strong> {{ selectedCustomer.plafon?.jumlahPlafon }}</p>
-          <p><strong>Sisa Plafon:</strong> {{ selectedCustomer.sisaPlafon }}</p>
-          <!-- Tambah field lain sesuai kebutuhan -->
-        </div>
+  <div class="row mb-4">
+    <div class="col-md-6 text-center">
+      <p><strong>Foto KTP:</strong></p>
+      <img [src]="selectedCustomer.fotoKtp" alt="Foto KTP" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;" />
+    </div>
+    <div class="col-md-6 text-center">
+      <p><strong>Foto Selfie dengan KTP:</strong></p>
+      <img [src]="selectedCustomer.fotoSelfie" alt="Foto Selfie dengan KTP" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p><strong>Nama:</strong> {{ selectedCustomer.user?.name }}</p>
+      <p><strong>Email:</strong> {{ selectedCustomer.user?.email }}</p>
+      <p><strong>Role:</strong> {{ selectedCustomer.user?.role?.nameRole }}</p>
+      <p><strong>NIK:</strong> {{ selectedCustomer.nik }}</p>
+      <p><strong>Tempat Lahir:</strong> {{ selectedCustomer.tempatLahir }}</p>
+      <p><strong>Tanggal Lahir:</strong> {{ selectedCustomer.tanggalLahir }}</p>
+      <p><strong>No Telp:</strong> {{ selectedCustomer.noTelp }}</p>
+    </div>
+    <div class="col-md-6">
+      <p><strong>Alamat:</strong> {{ selectedCustomer.alamat }}</p>
+      <p><strong>Ibu Kandung:</strong> {{ selectedCustomer.namaIbuKandung }}</p>
+      <p><strong>Pekerjaan:</strong> {{ selectedCustomer.pekerjaan }}</p>
+      <p><strong>Gaji:</strong> {{ selectedCustomer.gaji }}</p>
+      <p><strong>No Rekening:</strong> {{ selectedCustomer.noRek }}</p>
+      <p><strong>Status Rumah:</strong> {{ selectedCustomer.statusRumah }}</p>
+      <p><strong>Jenis Plafon:</strong> {{ selectedCustomer.plafon?.jenisPlafon }}</p>
+      <p><strong>Jumlah Plafon:</strong> {{ selectedCustomer.plafon?.jumlahPlafon }}</p>
+      <p><strong>Sisa Plafon:</strong> {{ selectedCustomer.sisaPlafon }}</p>
+    </div>
+  </div>
+</div>
+
         <div class="modal-footer">
           <button class="btn btn-secondary" (click)="closeDetailModal()">Tutup</button>
         </div>
