@@ -51,7 +51,7 @@ export const routes: Routes = [
       { path: 'cabang', component: FeatureBranchComponent},
       { path: 'customer', component: FeatureCustomerComponent},
       { path: 'plafon', component: FeaturePlafonComponent},
-      { path: 'role', component: FeatureRolefeatureComponent}
+      { path: 'role-fitur', component: FeatureRolefeatureComponent}
     ],
   }
   // {
