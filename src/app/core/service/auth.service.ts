@@ -6,8 +6,8 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  // private baseUrl = 'http://35.223.1.74/be/api/v1/auth'; // Change to your backend URL
-   private baseUrl = 'http://35.223.1.74/be/api/v1/auth';
+  // private baseUrl = 'http://34.58.106.240/be/api/v1/auth'; // Change to your backend URL
+   private baseUrl = 'http://34.58.106.240/be/api/v1/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -82,14 +82,14 @@ export class AuthService {
   }
 
   requestPasswordReset(nip: string) {
-    return this.http.post('http://35.223.1.74/be/api/v1/reset-password/employee', { nip }, { responseType: 'text' }).pipe(
+    return this.http.post('http://34.58.106.240/be/api/v1/reset-password/employee', { nip }, { responseType: 'text' }).pipe(
       catchError(err => throwError(() => err.error || 'Permintaan reset gagal.'))
     );
   }
 
   resetPassword(token: string, newPassword: string, confirmPassword: string) {
     return this.http.post(
-      `http://35.223.1.74/be/api/v1/reset-password/employee/reset/${token}`,
+      `http://34.58.106.240/be/api/v1/reset-password/employee/reset/${token}`,
       { newPassword, confirmPassword },
       { responseType: 'text' }
     ).pipe(

@@ -14,8 +14,8 @@ export interface Plafon {
   providedIn: 'root'
 })
 export class PlafonService {
-  // private baseUrl = 'http://35.223.1.74/be/api/v1/plafon';
-  private baseUrl = 'http://35.223.1.74/be/api/v1/plafon';
+  // private baseUrl = 'http://34.58.106.240/be/api/v1/plafon';
+  private baseUrl = 'http://34.58.106.240/be/api/v1/plafon';
 
   constructor(private http: HttpClient) {}
 
@@ -53,7 +53,7 @@ export class PlafonService {
       amount: amount.toString(),
       tenor: tenor.toString()
     };
-    return this.http.get('http://35.223.1.74/be/api/v1/pengajuan/simulasi', { params });
+    return this.http.get('http://34.58.106.240/be/api/v1/pengajuan/simulasi', { params });
   }
 
 }

@@ -46,8 +46,8 @@ export class ResetPasswordCustComponent {
         newPassword: this.form.value.newPassword,
       };
 
-      // this.http.post('http://35.223.1.74/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
-      this.http.post('http://35.223.1.74/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
+      // this.http.post('http://34.58.106.240/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
+      this.http.post('http://34.58.106.240/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
         next: (response) => {
           console.log('Response:', response); // debug
 

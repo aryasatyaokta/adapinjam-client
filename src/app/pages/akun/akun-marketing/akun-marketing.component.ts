@@ -33,7 +33,7 @@ export class AkunMarketingComponent implements OnInit {
       Authorization: `Bearer ${token}`
     };
   
-    this.http.get<any>('http://35.223.1.74/be/api/v1/user-employee/get-employee', { headers }).subscribe({
+    this.http.get<any>('http://34.58.106.240/be/api/v1/user-employee/get-employee', { headers }).subscribe({
       next: (data) => {
         this.userData = data;
         this.loading = false;
@@ -75,7 +75,7 @@ export class AkunMarketingComponent implements OnInit {
   
     this.http
       .put(
-        'http://35.223.1.74/be/api/v1/auth/update-password',
+        'http://34.58.106.240/be/api/v1/auth/update-password',
         {
           oldPassword: this.oldPassword,
           newPassword: this.newPassword,

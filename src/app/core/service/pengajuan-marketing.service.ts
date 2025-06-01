@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PengajuanMarketingService {
-  // private baseUrl = 'http://35.223.1.74/be/api/v1/pengajuan';
-  private baseUrl = 'http://35.223.1.74/be/api/v1/pengajuan';
+  // private baseUrl = 'http://34.58.106.240/be/api/v1/pengajuan';
+  private baseUrl = 'http://34.58.106.240/be/api/v1/pengajuan';
 
   private notifikasiTrigger = new BehaviorSubject<void>(undefined);
   notifikasiTrigger$ = this.notifikasiTrigger.asObservable();
