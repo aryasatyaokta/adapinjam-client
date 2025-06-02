@@ -113,7 +113,7 @@ export class LoginComponent {
   });
 }
 
-   updatePassword() {
+  updatePassword(): void {
     if (!this.oldPassword.trim() || !this.newPassword.trim()) {
       Swal.fire({
         icon: 'warning',
@@ -123,7 +123,7 @@ export class LoginComponent {
       });
       return;
     }
-  
+
     if (this.newPassword.length < 6) {
       Swal.fire({
         icon: 'warning',
@@ -133,49 +133,31 @@ export class LoginComponent {
       });
       return;
     }
-  
-    const token = this.auth.getToken();
-    if (!token) return;
-  
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+
+    this.auth.updatePassword(this.oldPassword, this.newPassword).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Password berhasil diubah. Silakan login ulang.',
+          confirmButtonText: 'Oke',
+        }).then(() => {
+          const modalElement = document.getElementById('updatePasswordModal');
+          if (modalElement) {
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modalInstance.hide();
+          }
+          this.auth.logout();
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal Mengubah Password',
+          text: err || 'Terjadi kesalahan saat mengubah password.',
+          confirmButtonText: 'Coba Lagi',
+        });
+      }
     });
-  
-    this.http
-      .put(
-        'http://34.58.106.240/be/api/v1/auth/update-password',
-        {
-          oldPassword: this.oldPassword,
-          newPassword: this.newPassword,
-        },
-        { headers, responseType: 'text' }
-      )
-      .subscribe({
-        next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Berhasil',
-            text: 'Password berhasil diubah. Silakan login ulang.',
-            confirmButtonText: 'Oke',
-          }).then(() => {
-            // Tutup modal
-            const modalElement = document.getElementById('updatePasswordModal');
-            if (modalElement) {
-              const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
-              modalInstance.hide();
-            }
-            this.auth.logout();
-          });
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Gagal Mengubah Password',
-            text: err.error || 'Terjadi kesalahan saat mengubah password.',
-            confirmButtonText: 'Coba Lagi',
-          });
-        },
-      });
   }
-  
 }

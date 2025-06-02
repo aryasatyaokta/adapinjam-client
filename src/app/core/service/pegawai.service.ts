@@ -35,4 +35,9 @@ export class PegawaiService {
   deleteEmployee(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers: this.getAuthHeaders() });
   }
+
+  getCurrentEmployee(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/get-employee`, { headers: this.getAuthHeaders() });
+  }
+
 }

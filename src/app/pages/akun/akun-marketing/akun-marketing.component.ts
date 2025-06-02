@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/service/auth.service';
-import { Router } from '@angular/router';
+import { PegawaiService } from '../../../core/service/pegawai.service';
 import Swal from 'sweetalert2';
 declare var bootstrap: any;
+
 @Component({
   selector: 'app-akun-marketing',
   templateUrl: './akun-marketing.component.html',
@@ -18,22 +18,20 @@ export class AkunMarketingComponent implements OnInit {
   oldPassword: string = '';
   newPassword: string = '';
 
-  showPasswordLama: boolean = false
+  showPasswordLama: boolean = false;
   showPasswordBaru: boolean = false;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private pegawaiService: PegawaiService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserEmployee();
   }
 
   fetchUserEmployee(): void {
-    const token = localStorage.getItem('token'); // atau wherever kamu simpan token
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-  
-    this.http.get<any>('http://34.58.106.240/be/api/v1/user-employee/get-employee', { headers }).subscribe({
+    this.pegawaiService.getCurrentEmployee().subscribe({
       next: (data) => {
         this.userData = data;
         this.loading = false;
@@ -45,70 +43,52 @@ export class AkunMarketingComponent implements OnInit {
     });
   }
 
-  updatePassword() {
-    if (!this.oldPassword.trim() || !this.newPassword.trim()) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Field tidak boleh kosong',
-        text: 'Harap isi password lama dan password baru.',
-        confirmButtonText: 'Oke',
-      });
-      return;
-    }
-  
-    if (this.newPassword.length < 6) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Password Terlalu Pendek',
-        text: 'Password baru minimal harus 6 karakter.',
-        confirmButtonText: 'Oke',
-      });
-      return;
-    }
-  
-    const token = this.authService.getToken();
-    if (!token) return;
-  
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+  updatePassword(): void {
+  if (!this.oldPassword.trim() || !this.newPassword.trim()) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Field tidak boleh kosong',
+      text: 'Harap isi password lama dan password baru.',
+      confirmButtonText: 'Oke',
     });
-  
-    this.http
-      .put(
-        'http://34.58.106.240/be/api/v1/auth/update-password',
-        {
-          oldPassword: this.oldPassword,
-          newPassword: this.newPassword,
-        },
-        { headers, responseType: 'text' }
-      )
-      .subscribe({
-        next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Berhasil',
-            text: 'Password berhasil diubah. Silakan login ulang.',
-            confirmButtonText: 'Oke',
-          }).then(() => {
-            // Tutup modal
-            const modalElement = document.getElementById('updatePasswordModal');
-            if (modalElement) {
-              const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
-              modalInstance.hide();
-            }
-            this.authService.logout();
-          });
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Gagal Mengubah Password',
-            text: err.error || 'Terjadi kesalahan saat mengubah password.',
-            confirmButtonText: 'Coba Lagi',
-          });
-        },
-      });
+    return;
   }
-  
-  
+
+  if (this.newPassword.length < 6) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Password Terlalu Pendek',
+      text: 'Password baru minimal harus 6 karakter.',
+      confirmButtonText: 'Oke',
+    });
+    return;
+  }
+
+  this.authService.updatePassword(this.oldPassword, this.newPassword).subscribe({
+    next: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Password berhasil diubah. Silakan login ulang.',
+        confirmButtonText: 'Oke',
+      }).then(() => {
+        const modalElement = document.getElementById('updatePasswordModal');
+        if (modalElement) {
+          const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+          modalInstance.hide();
+        }
+        this.authService.logout();
+      });
+    },
+    error: (err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal Mengubah Password',
+        text: err.error || 'Terjadi kesalahan saat mengubah password.',
+        confirmButtonText: 'Coba Lagi',
+      });
+    }
+  });
+}
+
 }

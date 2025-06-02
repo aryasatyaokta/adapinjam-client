@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/service/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,16 +18,17 @@ export class ResetPasswordCustComponent {
   token: string = '';
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {
-    this.form = this.fb.group({
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    });
+  private fb: FormBuilder,
+  private route: ActivatedRoute,
+  private auth: AuthService // pakai AuthService, bukan langsung HttpClient
+) {
+  this.form = this.fb.group({
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-    this.token = this.route.snapshot.queryParamMap.get('token') || '';
-  }
+  this.token = this.route.snapshot.queryParamMap.get('token') || '';
+}
+
 
   onSubmit(): void {
   if (this.form.invalid || !this.token) return;
@@ -41,16 +43,10 @@ export class ResetPasswordCustComponent {
     confirmButtonText: 'Ya, ubah password!'
   }).then((result) => {
     if (result.isConfirmed) {
-      const payload = {
-        token: this.token,
-        newPassword: this.form.value.newPassword,
-      };
+      const newPassword = this.form.value.newPassword;
 
-      // this.http.post('http://34.58.106.240/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
-      this.http.post('http://34.58.106.240/be/api/v1/auth/reset-password', payload, { responseType: 'text' }).subscribe({
+      this.auth.resetPasswordCust(this.token, newPassword).subscribe({
         next: (response) => {
-          console.log('Response:', response); // debug
-
           if (response.includes('successfully')) {
             Swal.fire({
               icon: 'success',
@@ -63,17 +59,14 @@ export class ResetPasswordCustComponent {
           } else {
             this.error = response;
           }
-
-          this.message = null;
         },
         error: (err) => {
-          console.error('Error:', err);
-          const errorMessage = typeof err.error === 'string' ? err.error : 'Reset password gagal.';
+          const errorMessage = typeof err === 'string' ? err : 'Reset password gagal.';
           this.error = errorMessage;
-          this.message = null;
         }
       });
     }
   });
 }
+
 }

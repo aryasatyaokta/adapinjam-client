@@ -24,6 +24,10 @@ export class FeatureRolefeatureComponent {
   newRoleName: string = '';
   searchRoleText: string = '';
 
+  private restrictedFeatures = ['GET_REVIEW_PENGAJUAN', 'GET_REVIEW_PENGAJUAN_HISTORY', 'REVIEW_PENGAJUAN'];
+  private allowedRolesForRestrictedFeatures = ['Marketing', 'Branch Manager', 'Back Office'];
+
+
   groupedFeatures: { [key: string]: any[] } = {};
   featuresForRoleGrouped: { [key: string]: any[] } = {};
 
@@ -85,29 +89,42 @@ export class FeatureRolefeatureComponent {
   }
 
   addRole(): void {
+  // Validasi fitur terbatas
+  const selectedRestrictedFeatures = this.features.filter(f =>
+    this.restrictedFeatures.includes(f.name) && this.selectedFeatureIds.includes(f.id)
+  );
+
+  if (selectedRestrictedFeatures.length > 0 && !this.allowedRolesForRestrictedFeatures.includes(this.newRoleName)) {
     Swal.fire({
-      title: 'Yakin ingin menambahkan role ini?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Tambahkan',
-      cancelButtonText: 'Batal'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const newRole = {
-          name: this.newRoleName,
-          featureIds: this.selectedFeatureIds
-        };
-        this.roleService.createRoleWithFeatures(newRole, this.selectedFeatureIds).subscribe(() => {
-          this.loadRoles();
-          this.newRoleName = '';
-          this.selectedFeatureIds = [];
-          this.closeModal();
-          Swal.fire('Berhasil!', 'Role berhasil ditambahkan.', 'success');
-        });
-      }
+      icon: 'warning',
+      title: 'Tidak Diizinkan!',
+      text: 'Fitur review pengajuan hanya boleh ditambahkan ke role: Marketing, Branch Manager, atau Back Office.'
     });
+    return;
   }
-  
+
+  Swal.fire({
+    title: 'Yakin ingin menambahkan role ini?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Ya, Tambahkan',
+    cancelButtonText: 'Batal'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const newRole = {
+        name: this.newRoleName,
+        featureIds: this.selectedFeatureIds
+      };
+      this.roleService.createRoleWithFeatures(newRole, this.selectedFeatureIds).subscribe(() => {
+        this.loadRoles();
+        this.newRoleName = '';
+        this.selectedFeatureIds = [];
+        this.closeModal();
+        Swal.fire('Berhasil!', 'Role berhasil ditambahkan.', 'success');
+      });
+    }
+  });
+} 
 
   closeModal(): void {
     const modalElement = document.getElementById('addRoleModal');
@@ -203,28 +220,43 @@ export class FeatureRolefeatureComponent {
   }
   
   updateRole(): void {
+  // Validasi fitur terbatas
+  const selectedRestrictedFeatures = this.features.filter(f =>
+    this.restrictedFeatures.includes(f.name) && this.selectedFeatureIds.includes(f.id)
+  );
+
+  if (selectedRestrictedFeatures.length > 0 && !this.allowedRolesForRestrictedFeatures.includes(this.newRoleName)) {
     Swal.fire({
-      title: 'Yakin ingin mengubah role ini?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Ubah',
-      cancelButtonText: 'Batal'
-    }).then((result) => {
-      if (result.isConfirmed && this.selectedRoleId !== null) {
-        const updatedRole = {
-          name: this.newRoleName,
-          featureIds: this.selectedFeatureIds
-        };
-  
-        this.roleService.updateRoleWithFeatures(this.selectedRoleId, updatedRole, this.selectedFeatureIds).subscribe(() => {
-          this.loadRoles();
-          this.selectedFeatureIds = [];
-          this.closeUpdateRoleModal();
-          Swal.fire('Berhasil!', 'Role berhasil diperbarui.', 'success');
-        });
-      }
+      icon: 'warning',
+      title: 'Tidak Diizinkan!',
+      text: 'Fitur review pengajuan hanya boleh dimiliki oleh role: Marketing, Branch Manager, atau Back Office.'
     });
+    return;
   }
+
+  Swal.fire({
+    title: 'Yakin ingin mengubah role ini?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Ya, Ubah',
+    cancelButtonText: 'Batal'
+  }).then((result) => {
+    if (result.isConfirmed && this.selectedRoleId !== null) {
+      const updatedRole = {
+        name: this.newRoleName,
+        featureIds: this.selectedFeatureIds
+      };
+
+      this.roleService.updateRoleWithFeatures(this.selectedRoleId, updatedRole, this.selectedFeatureIds).subscribe(() => {
+        this.loadRoles();
+        this.selectedFeatureIds = [];
+        this.closeUpdateRoleModal();
+        Swal.fire('Berhasil!', 'Role berhasil diperbarui.', 'success');
+      });
+    }
+  });
+}
+
   
   hasFeature(feature: string): boolean {
     const features = JSON.parse(localStorage.getItem('features') || '[]');

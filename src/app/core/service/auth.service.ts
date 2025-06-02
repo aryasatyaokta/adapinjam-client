@@ -96,4 +96,34 @@ export class AuthService {
       catchError(err => throwError(() => err.error || 'Reset password gagal.'))
     );
   }
+
+  updatePassword(oldPassword: string, newPassword: string) {
+    const token = this.getToken();
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    return this.http.put(
+      `${this.baseUrl}/update-password`,
+      { oldPassword, newPassword },
+      { headers, responseType: 'text' }
+    );
+  }
+
+  resetPasswordCust(token: string, newPassword: string) {
+    return this.http.post(
+      `${this.baseUrl}/reset-password`,
+      { token, newPassword },
+      { responseType: 'text' }
+    ).pipe(
+      catchError(err => throwError(() => err.error || 'Reset password gagal.'))
+    );
+  }
+
+  verifyEmail(token: string) {
+    return this.http.get(`${this.baseUrl}/verify-email?token=${token}`, { responseType: 'text' }).pipe(
+      catchError(err => throwError(() => err.error || 'Verifikasi gagal.'))
+    );
+  }
+
 }
